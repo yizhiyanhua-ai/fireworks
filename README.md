@@ -10,7 +10,7 @@ https://yizhiyanhua-ai.github.io/fireworks/
 
 - Vite + React
 - `base: '/fireworks/'`
-- GitHub Pages Actions workflow
+- GitHub Pages branch deployment
 
 ## 本地运行
 
@@ -34,4 +34,4 @@ npm run build
 
 ## 发布
 
-推送到 `yizhiyanhua-ai/fireworks` 的 `main` 分支后，GitHub Actions 会构建 `dist` 并部署 GitHub Pages。
+主分支保存源码；发布时运行 `npm run build`，将 `dist` 产物推送到 `gh-pages` 分支，并将 GitHub Pages source 配置为 `gh-pages` / root。
