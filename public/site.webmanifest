@@ -1,0 +1,9 @@
+{
+  "name": "一支烟花 AI 社区",
+  "short_name": "烟花 AI",
+  "start_url": "/fireworks/",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#0f0f1a",
+  "description": "开源、共创、长期主义的 AI 实践者社区。"
+}
