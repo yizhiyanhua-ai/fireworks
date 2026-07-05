@@ -16,7 +16,6 @@ import {
   Network,
   Rocket,
   ShieldCheck,
-  Sparkles,
   Star,
   TerminalSquare,
   Users,
@@ -99,7 +98,7 @@ function App() {
       <header className="site-header">
         <a className="brand" href="#top" aria-label="返回首页">
           <span className="brand-mark" aria-hidden="true">
-            <Sparkles size={20} />
+            <img src="/fireworks/assets/community-logo.png" alt="" />
           </span>
           <span>一支烟花 AI 社区</span>
         </a>
@@ -363,7 +362,7 @@ function App() {
       <footer>
         <div className="footer-brand">
           <span className="brand-mark" aria-hidden="true">
-            <Sparkles size={18} />
+            <img src="/fireworks/assets/community-logo.png" alt="" />
           </span>
           <strong>一支烟花 AI 社区</strong>
         </div>
