@@ -4,12 +4,16 @@ import {
   Boxes,
   CalendarDays,
   Code2,
+  Compass,
   ExternalLink,
   Github,
   GitFork,
   Globe2,
+  Layers3,
+  Lightbulb,
   LockKeyhole,
   MessageCircle,
+  Network,
   Rocket,
   ShieldCheck,
   Sparkles,
@@ -18,6 +22,8 @@ import {
   Users,
 } from 'lucide-react';
 import {
+  communityBeliefs,
+  communityIntro,
   featuredProjects,
   operatingPrinciples,
   projectStats,
@@ -35,9 +41,10 @@ const icons = {
 };
 
 const navItems = [
+  ['社区介绍', '#community'],
+  ['社区理念', '#principles'],
   ['开源项目', '#projects'],
   ['学习共创', '#rhythm'],
-  ['社区运营', '#principles'],
   ['资源导航', '#sources'],
 ];
 
@@ -120,7 +127,7 @@ function App() {
             <h1>一支烟花 AI 社区</h1>
             <p className="hero-lede">
               把 AI 实践变成可复用的方法、工具和作品。连接学习共创、工程项目和内容研究，
-              让一次探索成为下一次行动的基础设施。
+              让一次探索成为下一次行动的基础设施，也让社区的知识和理念不断沉淀。
             </p>
             <div className="hero-actions">
               <a className="button primary" href="#projects">
@@ -129,12 +136,10 @@ function App() {
               </a>
               <a
                 className="button secondary"
-                href="https://note.mowen.cn/detail/mQcaY_6GxndRz6_g8m5Uw?code=jc1ShFKLB7tkan9v"
-                target="_blank"
-                rel="noreferrer"
+                href="#community"
               >
                 <Users size={18} aria-hidden="true" />
-                查看社区介绍
+                了解社区理念
               </a>
             </div>
             <div className="hero-principles" aria-label="社区关键词">
@@ -147,7 +152,7 @@ function App() {
               <Stat value={projectStats.repos} label="公开仓库" />
               <Stat value={projectStats.stars} label="GitHub stars" />
               <Stat value={projectStats.forks} label="Forks" />
-              <Stat value="2023" label="社区起点" />
+              <Stat value={communityIntro.founded.slice(0, 4)} label="社区起点" />
             </div>
           </div>
           <div className="hero-visual" aria-label="烟花 AI 社区视觉">
@@ -163,10 +168,58 @@ function App() {
           </div>
         </section>
 
-        <section className="position-section section-band">
+        <section className="community-section section-band" id="community">
+          <div className="community-shell">
+            <div className="community-copy">
+              <span className="section-kicker">Community Intro</span>
+              <h2>{communityIntro.headline}</h2>
+              <p>{communityIntro.body}</p>
+              <div className="intro-notes">
+                {communityIntro.notes.map((item) => (
+                  <div key={item.label}>
+                    <span>{item.label}</span>
+                    <strong>{item.value}</strong>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="belief-panel" aria-label="社区理念">
+              <div className="belief-panel-head">
+                <Compass size={28} aria-hidden="true" />
+                <span>公开摘要里的核心线索</span>
+              </div>
+              <p>
+                社区介绍公开摘要显示它从 2023 年底开始，核心方向围绕 AI 实践、产品运营、
+                社区定位、用户留存和差异化策略。本页只使用公开可读信息，并把不可公开部分留在来源链接里。
+              </p>
+              <a
+                href="https://note.mowen.cn/detail/mQcaY_6GxndRz6_g8m5Uw?code=jc1ShFKLB7tkan9v"
+                target="_blank"
+                rel="noreferrer"
+              >
+                查看公开社区介绍 <ExternalLink size={16} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+          <div className="belief-grid">
+            {communityBeliefs.map((belief, index) => (
+              <article key={belief.title}>
+                <span className="belief-icon">
+                  {index === 0 && <Lightbulb size={28} aria-hidden="true" />}
+                  {index === 1 && <Layers3 size={28} aria-hidden="true" />}
+                  {index === 2 && <Network size={28} aria-hidden="true" />}
+                </span>
+                <h3>{belief.title}</h3>
+                <p>{belief.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="position-section">
           <div className="section-heading left">
             <span className="section-kicker">Community Position</span>
-            <h2>面向 AI 实践者的开源社区、学习网络与工程营地。</h2>
+            <h2>它连接四类长期价值。</h2>
           </div>
           <div className="position-grid">
             <article>
@@ -239,7 +292,7 @@ function App() {
         <section className="principles-section" id="principles">
           <div className="section-heading left">
             <span className="section-kicker">Operating Principles</span>
-            <h2>社区运营原则</h2>
+            <h2>社区理念不是口号，是每个项目的交付标准。</h2>
             <p>官网只呈现公开且可验证的信息。私密群聊、个人联系方式、未授权材料不进入页面。</p>
           </div>
           <div className="principles-grid">
@@ -281,7 +334,7 @@ function App() {
           <div className="join-content">
             <h2>一起点燃更多 AI 的火花</h2>
             <p>
-              从一个问题、一段脚本、一次复盘开始，把个人探索变成社区可以继续生长的项目。
+              从一个问题、一段脚本、一次复盘开始，把个人探索变成社区可以继续生长的项目、方法和理念。
             </p>
             <div className="hero-actions">
               <a

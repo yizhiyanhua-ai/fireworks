@@ -33,6 +33,42 @@ export const projectStats = {
   source: 'GitHub REST API / yizhiyanhua-ai public repositories',
 };
 
+export const communityIntro = {
+  founded: '2023 年底',
+  headline: '一支烟花 AI 社区，是面向 AI 实践者的长期共创网络。',
+  body:
+    '社区从技术背景和真实项目出发，关注 AI 工具、Agent 工作流、内容研究、开源技能与社区运营。它不是只讨论热点的聊天场，而是把一次探索沉淀为下一次可以复用的公开资产。',
+  notes: [
+    {
+      label: '定位',
+      value: '开源项目 + 学习共创 + 工程实践',
+    },
+    {
+      label: '方法',
+      value: '用真实问题驱动工具、文章、教程和演示站点',
+    },
+    {
+      label: '边界',
+      value: '公开内容优先，不暴露私密群聊、个人隐私和未授权资料',
+    },
+  ],
+};
+
+export const communityBeliefs = [
+  {
+    title: '让 AI 学习从信息消费走向作品生产',
+    body: '关注能跑起来的脚本、Skill、工作流和复盘，而不只停留在观点和资讯。',
+  },
+  {
+    title: '让个人经验变成团队可以继承的资产',
+    body: '把方法写进 README、图谱、模板、演示站点和可验证的开源项目。',
+  },
+  {
+    title: '让社区运营回到真实用户和长期留存',
+    body: '重视定位、差异化、用户需求和持续参与，而不是短期流量热闹。',
+  },
+];
+
 export const featuredProjects = [
   {
     name: 'fireworks-tech-graph',
@@ -143,12 +179,12 @@ export const featuredProjects = [
 export const operatingPrinciples = [
   {
     title: '开源开放',
-    body: '优先沉淀可验证、可复用、可 Fork 的项目和方法，不把经验只留在聊天记录里。',
+    body: '优先沉淀可验证、可复用、可 Fork 的项目和方法，让社区成果可以被外部开发者继续使用。',
     tone: 'blue',
   },
   {
     title: '共建共治',
-    body: '社区的价值来自真实使用者：提出问题、复盘过程、贡献脚本、修正文档。',
+    body: '社区的价值来自真实使用者：提出问题、复盘过程、贡献脚本、修正文档、共同维护质量。',
     tone: 'orange',
   },
   {
@@ -158,7 +194,7 @@ export const operatingPrinciples = [
   },
   {
     title: '长期主义',
-    body: '把一次性技巧升级成工具链、Skill、教程和开源项目，让学习曲线持续复利。',
+    body: '把一次性技巧升级成工具链、Skill、教程和开源项目，让个人学习曲线和社区资产持续复利。',
     tone: 'green',
   },
   {
