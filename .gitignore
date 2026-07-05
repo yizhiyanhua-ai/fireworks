@@ -5,4 +5,5 @@ dist
 playwright-report
 test-results
 docs/qa/
+docs/qa-public/
 docs/design-concept.png
