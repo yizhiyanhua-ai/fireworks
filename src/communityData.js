@@ -23,6 +23,14 @@ export const sourceNotes = [
     summary:
       '作为加入社区和内部介绍入口保留链接；公开页面不写入不可验证正文。',
   },
+  {
+    title: '公众号：一支烟花 AI',
+    type: '用户提供截图',
+    status: '用于展示公开主页信息和二维码',
+    url: '#official-account',
+    summary:
+      '公众号主页显示其专注硬核 AI 内容，包含原创内容数量、关注人数、视频号入口和扫码关注二维码。',
+  },
 ];
 
 export const projectStats = {
@@ -33,19 +41,54 @@ export const projectStats = {
   source: 'GitHub REST API / yizhiyanhua-ai public repositories',
 };
 
+export const officialAccount = {
+  name: '一支烟花 AI',
+  location: '上海 长宁',
+  tagline: '专注硬核 AI 内容，高质量 AI 洞见独一无二的一支烟花 AI 社区一群有极客精神的 AI 人',
+  videoChannel: '一支烟花 AI',
+  originalPosts: 223,
+  followers: '9,918',
+  source: '公众号主页截图，用户提供于 2026-07-06',
+  qrImage: '/fireworks/assets/wechat-qrcode.jpg',
+  profileImage: '/fireworks/assets/wechat-profile.jpg',
+};
+
+export const contentTracks = [
+  {
+    title: 'Agent 与 AI 产品',
+    body: '追踪 Agentic Thinking、Agent Wars、AI 原生产品和 SaaS 替代路径，关注产品判断与真实落地。',
+    accent: 'orange',
+  },
+  {
+    title: 'RAG / Memory / 基础设施',
+    body: '拆解 RAG、Paged Attention、长期记忆、模型基础设施与工程架构，把论文和实践连起来。',
+    accent: 'blue',
+  },
+  {
+    title: 'AI 创业与商业化',
+    body: '观察 Anthropic、微软、垂直 AI 产品和增长机制，讨论技术如何进入真实业务。',
+    accent: 'gold',
+  },
+  {
+    title: '开源工具与共创项目',
+    body: '从文章里的问题出发，沉淀脚本、Skill、演示站点和开源仓库，让内容继续变成工具。',
+    accent: 'green',
+  },
+];
+
 export const communityIntro = {
   founded: '2023 年底',
-  headline: '一支烟花 AI 社区，是面向 AI 实践者的长期共创网络。',
+  headline: '一支烟花 AI，是硬核 AI 内容与共创实验室。',
   body:
-    '社区从技术背景和真实项目出发，关注 AI 工具、Agent 工作流、内容研究、开源技能与社区运营。它不是只讨论热点的聊天场，而是把一次探索沉淀为下一次可以复用的公开资产。',
+    '社区从公众号的深度内容、GitHub 开源项目和社群共创出发，长期关注 AI 产品、Agent、模型基础设施、开源工具和真实落地案例。每一次观察、复盘和实验，都尽量沉淀成下一位实践者可以复用的公开资产。',
   notes: [
     {
       label: '定位',
-      value: '开源项目 + 学习共创 + 工程实践',
+      value: '硬核 AI 内容 + 开源项目 + 学习共创',
     },
     {
       label: '方法',
-      value: '用真实问题驱动工具、文章、教程和演示站点',
+      value: '用真实问题驱动文章、工具、教程和演示站点',
     },
     {
       label: '边界',

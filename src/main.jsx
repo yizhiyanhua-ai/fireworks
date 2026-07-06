@@ -23,7 +23,9 @@ import {
 import {
   communityBeliefs,
   communityIntro,
+  contentTracks,
   featuredProjects,
+  officialAccount,
   operatingPrinciples,
   projectStats,
   rhythm,
@@ -40,11 +42,11 @@ const icons = {
 };
 
 const navItems = [
+  ['公众号', '#official-account'],
   ['社区介绍', '#community'],
-  ['社区理念', '#principles'],
   ['开源项目', '#projects'],
+  ['社区理念', '#principles'],
   ['学习共创', '#rhythm'],
-  ['资源导航', '#sources'],
 ];
 
 function Stat({ value, label }) {
@@ -92,6 +94,17 @@ function ProjectCard({ project }) {
   );
 }
 
+function ContentTrackCard({ track, index }) {
+  const TrackIcon = [Rocket, TerminalSquare, Lightbulb, Code2][index];
+  return (
+    <article className={`content-track tone-${track.accent}`}>
+      <TrackIcon size={28} aria-hidden="true" />
+      <h3>{track.title}</h3>
+      <p>{track.body}</p>
+    </article>
+  );
+}
+
 function App() {
   return (
     <>
@@ -125,32 +138,32 @@ function App() {
           <div className="hero-copy">
             <h1>一支烟花 AI 社区</h1>
             <p className="hero-lede">
-              把 AI 实践变成可复用的方法、工具和作品。连接学习共创、工程项目和内容研究，
-              让一次探索成为下一次行动的基础设施，也让社区的知识和理念不断沉淀。
+              专注硬核 AI 内容，连接高质量洞见、开源项目与极客共创。把 AI 产品、Agent、
+              模型基础设施和真实落地案例拆成可以复用的方法、工具和作品。
             </p>
             <div className="hero-actions">
-              <a className="button primary" href="#projects">
-                <Boxes size={18} aria-hidden="true" />
-                浏览开源项目
+              <a className="button primary" href="#official-account">
+                <MessageCircle size={18} aria-hidden="true" />
+                关注公众号
               </a>
               <a
                 className="button secondary"
-                href="#community"
+                href="#projects"
               >
-                <Users size={18} aria-hidden="true" />
-                了解社区理念
+                <Boxes size={18} aria-hidden="true" />
+                浏览开源项目
               </a>
             </div>
             <div className="hero-principles" aria-label="社区关键词">
-              <span>开源开放</span>
-              <span>知识共创</span>
-              <span>透明协作</span>
-              <span>长期主义</span>
+              <span>硬核 AI 内容</span>
+              <span>Agent 观察</span>
+              <span>开源工具</span>
+              <span>社群共创</span>
             </div>
             <div className="stats-row">
+              <Stat value={officialAccount.originalPosts} label="原创内容" />
+              <Stat value={officialAccount.followers} label="公众号关注" />
               <Stat value={projectStats.repos} label="公开仓库" />
-              <Stat value={projectStats.stars} label="GitHub stars" />
-              <Stat value={projectStats.forks} label="Forks" />
               <Stat value={communityIntro.founded.slice(0, 4)} label="社区起点" />
             </div>
           </div>
@@ -164,6 +177,46 @@ function App() {
               <span>  share(code)</span>
               <span>  return impact()</span>
             </div>
+          </div>
+        </section>
+
+        <section className="official-section" id="official-account">
+          <div className="official-shell">
+            <div className="official-copy">
+              <span className="section-kicker">Official Account</span>
+              <h2>公众号是社区的内容入口，也是长期研究的公开档案。</h2>
+              <p>
+                「{officialAccount.name}」围绕硬核 AI 内容、Agent 产品观察、模型基础设施、
+                开源工具和社群共创持续输出。官网把这些内容方向和开源项目连接起来，
+                让文章、代码、复盘和学习路径形成一个可继续生长的实验室。
+              </p>
+              <div className="official-stats" aria-label="公众号公开数据">
+                <Stat value={officialAccount.originalPosts} label="原创内容" />
+                <Stat value={officialAccount.followers} label="关注人数" />
+                <Stat value={officialAccount.videoChannel} label="视频号" />
+              </div>
+              <div className="official-proof">
+                <BookOpen size={22} aria-hidden="true" />
+                <span>{officialAccount.tagline}</span>
+              </div>
+            </div>
+            <aside className="official-media" aria-label="公众号关注入口">
+              <div className="qr-card">
+                <img src={officialAccount.qrImage} alt="一支烟花 AI 公众号二维码" />
+                <div>
+                  <strong>扫码关注公众号</strong>
+                  <span>硬核 AI 内容、Agent 观察、开源项目和社群共创记录</span>
+                </div>
+              </div>
+              <div className="phone-frame">
+                <img src={officialAccount.profileImage} alt="一支烟花 AI 公众号主页截图" />
+              </div>
+            </aside>
+          </div>
+          <div className="content-track-grid" aria-label="公众号内容雷达">
+            {contentTracks.map((track, index) => (
+              <ContentTrackCard key={track.title} track={track} index={index} />
+            ))}
           </div>
         </section>
 
@@ -316,7 +369,13 @@ function App() {
           </div>
           <div className="source-list">
             {sourceNotes.map((source) => (
-              <a className="source-row" href={source.url} target="_blank" rel="noreferrer" key={source.url}>
+              <a
+                className="source-row"
+                href={source.url}
+                target={source.url.startsWith('#') ? undefined : '_blank'}
+                rel={source.url.startsWith('#') ? undefined : 'noreferrer'}
+                key={source.url}
+              >
                 <div>
                   <span>{source.type}</span>
                   <h3>{source.title}</h3>
