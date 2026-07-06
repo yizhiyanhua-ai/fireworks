@@ -29,7 +29,7 @@ export const sourceNotes = [
     status: '用于展示公开主页信息和二维码',
     url: '#official-account',
     summary:
-      '公众号主页显示其专注硬核 AI 内容，包含原创内容数量、关注人数、视频号入口和扫码关注二维码。',
+      '公众号主页显示其专注硬核 AI 内容，包含原创内容数量、视频号入口和扫码关注二维码。',
   },
 ];
 
@@ -47,10 +47,9 @@ export const officialAccount = {
   tagline: '专注硬核 AI 内容，高质量 AI 洞见独一无二的一支烟花 AI 社区一群有极客精神的 AI 人',
   videoChannel: '一支烟花 AI',
   originalPosts: 223,
-  followers: '9,918',
   source: '公众号主页截图，用户提供于 2026-07-06',
   qrImage: '/fireworks/assets/wechat-qrcode.jpg',
-  profileImage: '/fireworks/assets/wechat-profile.jpg',
+  profileImage: '/fireworks/assets/wechat-content-preview.jpg',
 };
 
 export const contentTracks = [

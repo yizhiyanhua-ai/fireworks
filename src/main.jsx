@@ -162,8 +162,8 @@ function App() {
             </div>
             <div className="stats-row">
               <Stat value={officialAccount.originalPosts} label="原创内容" />
-              <Stat value={officialAccount.followers} label="公众号关注" />
               <Stat value={projectStats.repos} label="公开仓库" />
+              <Stat value={projectStats.stars} label="GitHub stars" />
               <Stat value={communityIntro.founded.slice(0, 4)} label="社区起点" />
             </div>
           </div>
@@ -192,15 +192,15 @@ function App() {
               </p>
               <div className="official-stats" aria-label="公众号公开数据">
                 <Stat value={officialAccount.originalPosts} label="原创内容" />
-                <Stat value={officialAccount.followers} label="关注人数" />
                 <Stat value={officialAccount.videoChannel} label="视频号" />
+                <Stat value={communityIntro.founded.slice(0, 4)} label="社区起点" />
               </div>
               <div className="official-proof">
                 <BookOpen size={22} aria-hidden="true" />
                 <span>{officialAccount.tagline}</span>
               </div>
             </div>
-            <aside className="official-media" aria-label="公众号关注入口">
+            <aside className="official-media" aria-label="公众号入口">
               <div className="qr-card">
                 <img src={officialAccount.qrImage} alt="一支烟花 AI 公众号二维码" />
                 <div>
@@ -209,7 +209,7 @@ function App() {
                 </div>
               </div>
               <div className="phone-frame">
-                <img src={officialAccount.profileImage} alt="一支烟花 AI 公众号主页截图" />
+                <img src={officialAccount.profileImage} alt="一支烟花 AI 公众号内容预览" />
               </div>
             </aside>
           </div>
