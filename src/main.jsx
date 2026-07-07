@@ -3,6 +3,7 @@ import {
   BookOpen,
   Boxes,
   CalendarDays,
+  ChevronUp,
   Code2,
   Compass,
   ExternalLink,
@@ -58,45 +59,140 @@ function Stat({ value, label }) {
   );
 }
 
+function ProductPreview({ project, compact = false }) {
+  const previewRows = {
+    diagram: ['agent graph', 'rag pipeline', 'deploy map'],
+    design: ['brief intake', 'variant panel', 'critique merge'],
+    memory: ['skill note', 'context layer', 'recall path'],
+    tools: ['cli index', 'workflow card', 'search cache'],
+    media: ['image search', 'clip queue', 'asset board'],
+    registry: ['scan skills', 'update plan', 'release check'],
+    research: ['terms map', 'value chain', 'players list'],
+    video: ['chapter cut', 'insight card', 'study notes'],
+  };
+  const rows = previewRows[project.previewType] || previewRows.tools;
+
+  return (
+    <div className={`product-preview preview-${project.previewType}${compact ? ' compact' : ''}`} aria-hidden="true">
+      <div className="preview-window-bar">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="preview-canvas">
+        <div className="preview-sidebar">
+          {rows.map((row) => (
+            <span key={row}>{row}</span>
+          ))}
+        </div>
+        <div className="preview-main">
+          <div className="preview-command">{project.tagline}</div>
+          <div className="preview-graph">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="preview-output">
+            <strong>{project.productType}</strong>
+            <span>{project.highlights[0]}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ProjectCard({ project }) {
+  if (!project.flagship) {
+    return (
+      <article className={`project-card product-row accent-${project.accent}`}>
+        <div className="product-rank">
+          <span>{project.launchRank}</span>
+          <strong>
+            <ChevronUp size={14} aria-hidden="true" /> {project.upvotes}
+          </strong>
+        </div>
+        <ProductPreview project={project} compact />
+        <div className="product-row-body">
+          <div className="project-topline">
+            <span>{project.productType}</span>
+            <span>{project.category}</span>
+          </div>
+          <div className="project-title-row">
+            <h3>{project.name}</h3>
+            <span className="project-language">{project.language}</span>
+          </div>
+          <p className="project-tagline">{project.tagline}</p>
+          <p className="project-outcome">{project.outcome}</p>
+          <div className="feature-chip-row">
+            {project.highlights.slice(0, 3).map((highlight) => (
+              <span key={highlight}>{highlight}</span>
+            ))}
+          </div>
+          <div className="project-actions">
+            {project.demo && (
+              <a className="launch-link" href={project.demo} target="_blank" rel="noreferrer">
+                体验 Demo <ExternalLink size={15} aria-hidden="true" />
+              </a>
+            )}
+            <a href={project.url} target="_blank" rel="noreferrer">
+              查看开源 <ExternalLink size={15} aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   return (
     <article className={`project-card accent-${project.accent}${project.flagship ? ' flagship' : ''}`}>
-      <div className="project-topline">
-        <span>{project.productType}</span>
-        <span>{project.category}</span>
-      </div>
-      <div className="project-title-row">
-        <h3>{project.name}</h3>
-        <span className="project-language">{project.language}</span>
-      </div>
-      <p className="project-outcome">{project.outcome}</p>
-      <div className="project-use-case">
-        <span>使用场景</span>
-        <strong>{project.useCase}</strong>
-      </div>
-      <div className="tag-row">
-        {project.tags.map((tag) => (
-          <span key={tag}>{tag}</span>
-        ))}
-      </div>
-      <div className="project-metrics" aria-label={`${project.name} GitHub metrics`}>
-        <span>
-          <Star size={15} aria-hidden="true" /> {project.stars.toLocaleString()}
-        </span>
-        <span>
-          <GitFork size={15} aria-hidden="true" /> {project.forks.toLocaleString()}
-        </span>
-      </div>
-      <div className="project-actions">
-        {project.demo && (
-          <a className="launch-link" href={project.demo} target="_blank" rel="noreferrer">
-            体验 Demo <ExternalLink size={15} aria-hidden="true" />
+      <div className="flagship-copy">
+        <div className="product-launch-meta">
+          <span>{project.launchRank}</span>
+          <strong>
+            <ChevronUp size={15} aria-hidden="true" /> {project.upvotes}
+          </strong>
+          <span>社区产品发布</span>
+        </div>
+        <div className="project-topline">
+          <span>{project.productType}</span>
+          <span>{project.category}</span>
+        </div>
+        <div className="project-title-row">
+          <h3>{project.name}</h3>
+          <span className="project-language">{project.language}</span>
+        </div>
+        <p className="project-tagline">{project.tagline}</p>
+        <p className="project-outcome">{project.outcome}</p>
+        <div className="project-use-case">
+          <span>使用场景</span>
+          <strong>{project.useCase}</strong>
+        </div>
+        <div className="feature-chip-row">
+          {project.highlights.map((highlight) => (
+            <span key={highlight}>{highlight}</span>
+          ))}
+        </div>
+        <div className="project-metrics" aria-label={`${project.name} GitHub metrics`}>
+          <span>
+            <Star size={15} aria-hidden="true" /> {project.stars.toLocaleString()}
+          </span>
+          <span>
+            <GitFork size={15} aria-hidden="true" /> {project.forks.toLocaleString()}
+          </span>
+        </div>
+        <div className="project-actions">
+          {project.demo && (
+            <a className="launch-link" href={project.demo} target="_blank" rel="noreferrer">
+              体验 Demo <ExternalLink size={15} aria-hidden="true" />
+            </a>
+          )}
+          <a href={project.url} target="_blank" rel="noreferrer">
+            查看开源 <ExternalLink size={15} aria-hidden="true" />
           </a>
-        )}
-        <a href={project.url} target="_blank" rel="noreferrer">
-          查看开源 <ExternalLink size={15} aria-hidden="true" />
-        </a>
+        </div>
       </div>
+      <ProductPreview project={project} />
     </article>
   );
 }
@@ -307,10 +403,10 @@ function App() {
         <section className="projects-section section-band" id="projects">
           <div className="section-heading">
             <span className="section-kicker">AI Product Lab</span>
-            <h2>一组从真实工作流里长出来的开源 AI 产品。</h2>
+            <h2>把社区里的 AI 实验，打磨成可体验的产品。</h2>
             <p>
-              这些项目不是孤立仓库，而是围绕 AI 创作、Agent 协作、长期记忆、知识处理和内容生产搭建的产品原型。
-              社区用真实需求推动它们迭代，也用开源让更多实践者复用。
+              用 Product Hunt 式的方式看这些开源项目：每个产品都对应一个真实 AI 工作流，有明确使用场景、产品特点和可复用入口。
+              旗舰项目优先展示体验界面，其他工具保持清晰的产品定位。
             </p>
           </div>
           <div className="product-lab-intro" aria-label="AI 产品实验室方法">
