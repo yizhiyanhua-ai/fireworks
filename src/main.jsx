@@ -60,13 +60,20 @@ function Stat({ value, label }) {
 
 function ProjectCard({ project }) {
   return (
-    <article className={`project-card accent-${project.accent}`}>
+    <article className={`project-card accent-${project.accent}${project.flagship ? ' flagship' : ''}`}>
       <div className="project-topline">
+        <span>{project.productType}</span>
         <span>{project.category}</span>
-        <span>{project.language}</span>
       </div>
-      <h3>{project.name}</h3>
-      <p>{project.description}</p>
+      <div className="project-title-row">
+        <h3>{project.name}</h3>
+        <span className="project-language">{project.language}</span>
+      </div>
+      <p className="project-outcome">{project.outcome}</p>
+      <div className="project-use-case">
+        <span>使用场景</span>
+        <strong>{project.useCase}</strong>
+      </div>
       <div className="tag-row">
         {project.tags.map((tag) => (
           <span key={tag}>{tag}</span>
@@ -81,14 +88,14 @@ function ProjectCard({ project }) {
         </span>
       </div>
       <div className="project-actions">
-        <a href={project.url} target="_blank" rel="noreferrer">
-          GitHub <ExternalLink size={15} aria-hidden="true" />
-        </a>
         {project.demo && (
-          <a href={project.demo} target="_blank" rel="noreferrer">
-            Demo <ExternalLink size={15} aria-hidden="true" />
+          <a className="launch-link" href={project.demo} target="_blank" rel="noreferrer">
+            体验 Demo <ExternalLink size={15} aria-hidden="true" />
           </a>
         )}
+        <a href={project.url} target="_blank" rel="noreferrer">
+          查看开源 <ExternalLink size={15} aria-hidden="true" />
+        </a>
       </div>
     </article>
   );
@@ -297,17 +304,28 @@ function App() {
           </div>
         </section>
 
-        <section className="projects-section" id="projects">
+        <section className="projects-section section-band" id="projects">
           <div className="section-heading">
-            <span className="section-kicker">Open Source Matrix</span>
-            <h2>开源项目矩阵</h2>
+            <span className="section-kicker">AI Product Lab</span>
+            <h2>一组从真实工作流里长出来的开源 AI 产品。</h2>
             <p>
-              以下项目来自 yizhiyanhua-ai 组织公开仓库。星标、Fork 和更新时间来自 2026-07-05
-              的 GitHub API 快照。
+              这些项目不是孤立仓库，而是围绕 AI 创作、Agent 协作、长期记忆、知识处理和内容生产搭建的产品原型。
+              社区用真实需求推动它们迭代，也用开源让更多实践者复用。
             </p>
           </div>
+          <div className="product-lab-intro" aria-label="AI 产品实验室方法">
+            <span>观察前沿问题</span>
+            <span>拆解真实工作流</span>
+            <span>产品化为开源工具</span>
+            <span>社区继续复用验证</span>
+          </div>
           <div className="project-grid">
-            {featuredProjects.map((project) => (
+            {featuredProjects.filter((project) => project.flagship).map((project) => (
+              <ProjectCard key={project.name} project={project} />
+            ))}
+          </div>
+          <div className="product-portfolio-grid">
+            {featuredProjects.filter((project) => !project.flagship).map((project) => (
               <ProjectCard key={project.name} project={project} />
             ))}
           </div>

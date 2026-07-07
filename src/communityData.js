@@ -114,7 +114,10 @@ export const communityBeliefs = [
 export const featuredProjects = [
   {
     name: 'fireworks-tech-graph',
-    category: '技术图谱',
+    category: 'AI 创作与表达',
+    productType: 'Technical Visual AI',
+    useCase: '技术图生成 / 架构表达 / Agent 流程可视化',
+    outcome: '把自然语言里的系统想法，直接变成可发布、可复用的 SVG + PNG 技术图。',
     description:
       '用自然语言生成可发布的 SVG + PNG 技术图，覆盖 Agent、RAG、UML 与多种视觉风格。',
     url: 'https://github.com/yizhiyanhua-ai/fireworks-tech-graph',
@@ -124,10 +127,14 @@ export const featuredProjects = [
     language: 'Python',
     tags: ['AI diagrams', 'SVG/PNG', 'Agent workflow'],
     accent: 'blue',
+    flagship: true,
   },
   {
     name: 'fireworks-design',
-    category: '前端生成',
+    category: 'AI 创作与表达',
+    productType: 'Multi-agent Design Studio',
+    useCase: '前端页面生成 / 多方向探索 / 设计评审',
+    outcome: '把“想做一个页面”升级成多 Agent 并行探索、评审、融合和对抗打磨的设计流水线。',
     description:
       'Claude Code 工作流：多方向探索、面板评审、融合与对抗打磨，生成高质量前端页面。',
     url: 'https://github.com/yizhiyanhua-ai/fireworks-design',
@@ -137,10 +144,14 @@ export const featuredProjects = [
     language: 'HTML',
     tags: ['Frontend', 'Multi-agent', 'Design system'],
     accent: 'purple',
+    flagship: true,
   },
   {
     name: 'fireworks-skill-memory',
-    category: '长期记忆',
+    category: 'AI 记忆与知识系统',
+    productType: 'Skill Memory OS',
+    useCase: '技能记忆 / 经验复用 / 跨会话上下文',
+    outcome: '让 Claude Code 与 Codex Skills 沉淀按技能分层的经验，减少重复探索。',
     description:
       '为 Claude Code 与 Codex Skills 提供按技能分层的持久化经验记忆，让工具越用越懂上下文。',
     url: 'https://github.com/yizhiyanhua-ai/fireworks-skill-memory',
@@ -153,7 +164,10 @@ export const featuredProjects = [
   },
   {
     name: 'fireworks-ai-tools-memory',
-    category: '工具记忆',
+    category: 'AI 记忆与知识系统',
+    productType: 'Tools Memory Layer',
+    useCase: 'CLI 工具记忆 / 工作流复用 / 知识库',
+    outcome: '把 AI 工具、CLI 命令和脚本经验保存成跨会话可检索的工作记忆。',
     description:
       '面向 AI 工具、CLI 工作流和可复用脚本的跨会话记忆层，沉淀工具使用经验。',
     url: 'https://github.com/yizhiyanhua-ai/fireworks-ai-tools-memory',
@@ -166,7 +180,10 @@ export const featuredProjects = [
   },
   {
     name: 'media-downloader',
-    category: '素材工作流',
+    category: 'AI 内容生产',
+    productType: 'Media Workflow AI',
+    useCase: '素材搜索 / 图片视频下载 / 内容创作',
+    outcome: '用描述驱动素材收集，把内容生产前期的搜索、筛选和下载流程自动化。',
     description:
       '根据描述自动搜索和下载图片、视频片段，服务内容创作、研究与视觉素材收集。',
     url: 'https://github.com/yizhiyanhua-ai/media-downloader',
@@ -179,7 +196,10 @@ export const featuredProjects = [
   },
   {
     name: 'skills-updater',
-    category: '技能生态',
+    category: 'AI Agent 工作流',
+    productType: 'Skill Registry',
+    useCase: '技能发现 / 技能更新 / Agent 工具链维护',
+    outcome: '让 Claude Code skills 具备可发现、可更新、可维护的生态入口。',
     description:
       '管理、更新和发现 Claude Code skills，让社区工具链保持可维护、可迭代。',
     url: 'https://github.com/yizhiyanhua-ai/skills-updater',
@@ -192,7 +212,10 @@ export const featuredProjects = [
   },
   {
     name: 'chuinb-skill',
-    category: '学习速成',
+    category: 'AI 学习与研究',
+    productType: 'Industry Learning Agent',
+    useCase: '行业速成 / 术语拆解 / 产业链研究',
+    outcome: '把陌生行业拆成术语、产业链、关键玩家和行动路线，帮助实践者快速进入语境。',
     description:
       '行业速成大师：把陌生行业拆成术语、产业链、关键玩家和行动路线。',
     url: 'https://github.com/yizhiyanhua-ai/chuinb-skill',
@@ -205,7 +228,10 @@ export const featuredProjects = [
   },
   {
     name: 'youtube-ai-digest',
-    category: '内容研究',
+    category: 'AI 学习与研究',
+    productType: 'Video Research Digest',
+    useCase: 'AI 视频总结 / 学习材料沉淀 / 长内容处理',
+    outcome: '把 AI 相关长视频转成结构化摘要和可复用学习材料，连接内容输入和知识沉淀。',
     description:
       '浏览、总结并捕获 AI 相关 YouTube 视频，把长视频转成可复用的学习材料。',
     url: 'https://github.com/yizhiyanhua-ai/youtube-ai-digest',
