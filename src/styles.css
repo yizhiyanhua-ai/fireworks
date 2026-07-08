@@ -386,6 +386,8 @@ h1 {
 }
 
 .official-copy {
+  display: flex;
+  flex-direction: column;
   padding: clamp(28px, 4vw, 50px);
 }
 
@@ -440,6 +442,36 @@ h1 {
 
 .official-proof span {
   font-weight: 800;
+  line-height: 1.65;
+}
+
+.official-copy .content-track-grid.inline {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: none;
+  margin: auto 0 0;
+  padding-top: 28px;
+}
+
+.official-copy .content-track {
+  min-height: 154px;
+  padding: 18px;
+  box-shadow: none;
+}
+
+.official-copy .content-track svg {
+  width: 22px;
+  height: 22px;
+}
+
+.official-copy .content-track h3 {
+  margin-top: 14px;
+  font-size: 17px;
+}
+
+.official-copy .content-track p {
+  margin-top: 8px;
+  font-size: 12px;
   line-height: 1.65;
 }
 
@@ -598,7 +630,7 @@ h1 {
   display: block;
   margin-top: 4px;
   color: var(--text);
-  font-size: clamp(26px, 3vw, 38px);
+  font-size: clamp(22px, 2.4vw, 31px);
   letter-spacing: 0;
 }
 
@@ -647,8 +679,8 @@ h1 {
 
 .x-feed-track {
   display: grid;
-  gap: 18px;
-  padding: 28px 38px 28px;
+  gap: 12px;
+  padding: 22px 30px;
   animation: x-feed-scroll 30s linear infinite;
 }
 
@@ -658,7 +690,7 @@ h1 {
 
 .x-post-card {
   display: block;
-  padding: 22px;
+  padding: 16px;
   border: 1px solid rgba(148, 163, 184, 0.18);
   border-radius: 8px;
   color: inherit;
@@ -679,19 +711,19 @@ h1 {
   gap: 12px;
   color: var(--blue);
   font-family: "SF Mono", "Fira Code", ui-monospace, monospace;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
   text-transform: uppercase;
 }
 
 .x-post-card p {
-  margin: 16px 0 0;
+  margin: 11px 0 0;
   color: #e2e8f0;
-  font-size: clamp(18px, 1.7vw, 26px);
-  line-height: 1.72;
+  font-size: clamp(14px, 1.25vw, 18px);
+  line-height: 1.68;
   text-decoration: underline;
   text-decoration-color: rgba(148, 163, 184, 0.36);
-  text-underline-offset: 7px;
+  text-underline-offset: 5px;
   text-wrap: pretty;
 }
 
@@ -699,15 +731,15 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 18px;
+  margin-top: 12px;
 }
 
 .x-post-tags span {
-  padding: 7px 10px;
+  padding: 5px 8px;
   border: 1px solid rgba(59, 130, 246, 0.26);
   border-radius: 8px;
   color: #bfdbfe;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 800;
   background: rgba(29, 78, 216, 0.12);
 }
@@ -2206,6 +2238,15 @@ footer {
 
   .x-post-tags span {
     font-size: 11px;
+  }
+
+  .official-copy .content-track-grid.inline {
+    grid-template-columns: 1fr;
+    padding-top: 22px;
+  }
+
+  .official-copy .content-track {
+    min-height: 136px;
   }
 
   .phone-frame {

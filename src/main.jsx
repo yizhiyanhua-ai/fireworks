@@ -391,6 +391,11 @@ function App() {
                 <BookOpen size={22} aria-hidden="true" />
                 <span>{officialAccount.tagline}</span>
               </div>
+              <div className="content-track-grid inline" aria-label="公众号内容雷达">
+                {contentTracks.map((track, index) => (
+                  <ContentTrackCard key={track.title} track={track} index={index} />
+                ))}
+              </div>
             </div>
             <aside className="official-media" aria-label="公众号入口">
               <XFeedPanel />
@@ -402,11 +407,6 @@ function App() {
                 </div>
               </div>
             </aside>
-          </div>
-          <div className="content-track-grid" aria-label="公众号内容雷达">
-            {contentTracks.map((track, index) => (
-              <ContentTrackCard key={track.title} track={track} index={index} />
-            ))}
           </div>
         </section>
 
