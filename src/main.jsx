@@ -290,8 +290,8 @@ function XFeedPanel() {
         </div>
       </div>
       <div className="x-feed-status">
-        <span>读取公开 JSON 快照</span>
-        <span>X API 每 6 小时同步</span>
+        <span>20 条公开 JSON 快照</span>
+        <span>X API 定时同步预留</span>
       </div>
     </div>
   );
