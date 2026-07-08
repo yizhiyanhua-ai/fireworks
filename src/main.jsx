@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   BookOpen,
@@ -31,6 +32,7 @@ import {
   projectStats,
   rhythm,
   sourceNotes,
+  xFeedFallback,
 } from './communityData';
 import './styles.css';
 
@@ -79,25 +81,35 @@ function ProductPreview({ project, compact = false }) {
         <span />
         <span />
       </div>
-      <div className="preview-canvas">
-        <div className="preview-sidebar">
-          {rows.map((row) => (
-            <span key={row}>{row}</span>
-          ))}
-        </div>
-        <div className="preview-main">
-          <div className="preview-command">{project.tagline}</div>
-          <div className="preview-graph">
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="preview-output">
-            <strong>{project.productType}</strong>
-            <span>{project.highlights[0]}</span>
+      {project.previewImage && !compact ? (
+        <div className="preview-image-shell">
+          <img src={project.previewImage} alt={project.previewAlt} loading="lazy" />
+          <div className="preview-image-caption">
+            <span>{project.previewSource}</span>
+            <strong>{project.tagline}</strong>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="preview-canvas">
+          <div className="preview-sidebar">
+            {rows.map((row) => (
+              <span key={row}>{row}</span>
+            ))}
+          </div>
+          <div className="preview-main">
+            <div className="preview-command">{project.tagline}</div>
+            <div className="preview-graph">
+              <span />
+              <span />
+              <span />
+            </div>
+            <div className="preview-output">
+              <strong>{project.productType}</strong>
+              <span>{project.highlights[0]}</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -208,6 +220,83 @@ function ContentTrackCard({ track, index }) {
   );
 }
 
+function XFeedPanel() {
+  const [feed, setFeed] = useState(xFeedFallback);
+  const posts = useMemo(() => {
+    const items = feed.posts?.length ? feed.posts : xFeedFallback.posts;
+    return [...items, ...items];
+  }, [feed]);
+
+  useEffect(() => {
+    let active = true;
+
+    fetch('/fireworks/assets/x-feed.json', { cache: 'no-store' })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`x-feed ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((payload) => {
+        if (active && Array.isArray(payload.posts) && payload.posts.length > 0) {
+          setFeed({
+            ...xFeedFallback,
+            ...payload,
+            account: {
+              ...xFeedFallback.account,
+              ...(payload.account ?? {}),
+            },
+          });
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setFeed(xFeedFallback);
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  return (
+    <div className="x-feed-panel" aria-label="X 动态流">
+      <div className="x-feed-header">
+        <div>
+          <span>X / Live Notes</span>
+          <strong>@{feed.account.handle}</strong>
+        </div>
+        <a href={feed.account.url} target="_blank" rel="noreferrer">
+          查看 X <ExternalLink size={14} aria-hidden="true" />
+        </a>
+      </div>
+      <div className="x-feed-window">
+        <div className="x-feed-track">
+          {posts.map((post, index) => (
+            <a className="x-post-card" href={post.url} target="_blank" rel="noreferrer" key={`${post.id}-${index}`}>
+              <div className="x-post-meta">
+                <span>{post.createdAt}</span>
+                <span>{post.metrics}</span>
+              </div>
+              <p>{post.text}</p>
+              <div className="x-post-tags">
+                {post.tags?.slice(0, 3).map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+      <div className="x-feed-status">
+        <span>读取公开 JSON 快照</span>
+        <span>MCP/API 可定时覆盖</span>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   return (
     <>
@@ -311,9 +400,7 @@ function App() {
                   <span>硬核 AI 内容、Agent 观察、开源项目和社群共创记录</span>
                 </div>
               </div>
-              <div className="phone-frame">
-                <img src={officialAccount.profileImage} alt="一支烟花 AI 公众号内容预览" />
-              </div>
+              <XFeedPanel />
             </aside>
           </div>
           <div className="content-track-grid" aria-label="公众号内容雷达">

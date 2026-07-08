@@ -1,0 +1,43 @@
+{
+  "account": {
+    "name": "烟花老师",
+    "handle": "teach_fireworks",
+    "url": "https://x.com/teach_fireworks"
+  },
+  "updatedAt": "2026-07-07T00:00:00+08:00",
+  "source": "static snapshot; replace this file from X MCP/API sync",
+  "posts": [
+    {
+      "id": "2050190799837741377",
+      "url": "https://x.com/teach_fireworks/status/2050190799837741377",
+      "createdAt": "本地归档",
+      "text": "AI coding 的竞争，开始从模型能力竞争，转向 Agent 工作流竞争。长任务、少打断、并行推进和真实交付，正在变成新的产品分水岭。",
+      "tags": ["Codex", "Claude Code", "Agent Workflow"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "2048755403220197455",
+      "url": "https://x.com/teach_fireworks/status/2048755403220197455",
+      "createdAt": "本地归档",
+      "text": "高频用户真正痛的不是“写不出来”，而是 Agent 已经走在正确轨道上时，总被授权、确认、上下文断点打断。",
+      "tags": ["Long Tasks", "Developer UX", "Agent Infra"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "2048753266637570474",
+      "url": "https://x.com/teach_fireworks/status/2048753266637570474",
+      "createdAt": "本地归档",
+      "text": "一旦进入多任务并行，单账号、单线程、单终端体验就会变成瓶颈。Coding agent 正在从助手变成工作系统。",
+      "tags": ["Parallel Agents", "Worktree", "Workflow"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "2051236094352793753",
+      "url": "https://x.com/teach_fireworks/status/2051236094352793753",
+      "createdAt": "本地归档",
+      "text": "Goals 不是一个小功能，而是长任务委托的入口。真正重要的是任务能否跨 session 持续、自己验证，并在完成条件满足时停下来。",
+      "tags": ["Goals", "Verification", "Automation"],
+      "metrics": "X archive"
+    }
+  ]
+}

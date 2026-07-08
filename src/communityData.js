@@ -52,6 +52,49 @@ export const officialAccount = {
   profileImage: '/fireworks/assets/wechat-content-preview.jpg',
 };
 
+export const xFeedFallback = {
+  account: {
+    name: '烟花老师',
+    handle: 'teach_fireworks',
+    url: 'https://x.com/teach_fireworks',
+  },
+  updatedAt: '2026-07-07T00:00:00+08:00',
+  posts: [
+    {
+      id: '2050190799837741377',
+      url: 'https://x.com/teach_fireworks/status/2050190799837741377',
+      createdAt: '本地归档',
+      text: 'AI coding 的竞争，开始从模型能力竞争，转向 Agent 工作流竞争。长任务、少打断、并行推进和真实交付，正在变成新的产品分水岭。',
+      tags: ['Codex', 'Claude Code', 'Agent Workflow'],
+      metrics: 'X archive',
+    },
+    {
+      id: '2048755403220197455',
+      url: 'https://x.com/teach_fireworks/status/2048755403220197455',
+      createdAt: '本地归档',
+      text: '高频用户真正痛的不是“写不出来”，而是 Agent 已经走在正确轨道上时，总被授权、确认、上下文断点打断。',
+      tags: ['Long Tasks', 'Developer UX', 'Agent Infra'],
+      metrics: 'X archive',
+    },
+    {
+      id: '2048753266637570474',
+      url: 'https://x.com/teach_fireworks/status/2048753266637570474',
+      createdAt: '本地归档',
+      text: '一旦进入多任务并行，单账号、单线程、单终端体验就会变成瓶颈。Coding agent 正在从助手变成工作系统。',
+      tags: ['Parallel Agents', 'Worktree', 'Workflow'],
+      metrics: 'X archive',
+    },
+    {
+      id: '2051236094352793753',
+      url: 'https://x.com/teach_fireworks/status/2051236094352793753',
+      createdAt: '本地归档',
+      text: 'Goals 不是一个小功能，而是长任务委托的入口。真正重要的是任务能否跨 session 持续、自己验证，并在完成条件满足时停下来。',
+      tags: ['Goals', 'Verification', 'Automation'],
+      metrics: 'X archive',
+    },
+  ],
+};
+
 export const contentTracks = [
   {
     title: 'Agent 与 AI 产品',
@@ -122,6 +165,9 @@ export const featuredProjects = [
     launchRank: '#1',
     upvotes: '8.3k',
     previewType: 'diagram',
+    previewImage: '/fireworks/assets/product-tech-graph-blueprint.png',
+    previewAlt: 'fireworks-tech-graph README 中的 Blueprint 技术图样例',
+    previewSource: 'README sample: Style 3 Blueprint',
     highlights: ['自然语言生成技术图', '多种架构图风格', 'SVG + PNG 可发布输出'],
     description:
       '用自然语言生成可发布的 SVG + PNG 技术图，覆盖 Agent、RAG、UML 与多种视觉风格。',
@@ -144,6 +190,9 @@ export const featuredProjects = [
     launchRank: '#2',
     upvotes: '48',
     previewType: 'design',
+    previewImage: '/fireworks/assets/product-fireworks-design-pipeline.svg',
+    previewAlt: 'fireworks-design README 中的六阶段工作流图',
+    previewSource: 'README workflow: Six-phase pipeline',
     highlights: ['多方向并行探索', '面板评审与融合', '页面生成工作流'],
     description:
       'Claude Code 工作流：多方向探索、面板评审、融合与对抗打磨，生成高质量前端页面。',
