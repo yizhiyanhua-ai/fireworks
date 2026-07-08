@@ -1,0 +1,217 @@
+{
+  "account": {
+    "name": "一支烟花 AI"
+  },
+  "updatedAt": "2026-07-09T00:00:00+08:00",
+  "source": "local export snapshot + public article links; replace with sync:wechat-articles when official credentials are available",
+  "endpoint": "POST /cgi-bin/freepublish/batchget",
+  "articles": [
+    {
+      "id": "gemini3-product-sample",
+      "title": "Gemini3 首测！游戏、网页、设计、3D、动画制作...超出期待！",
+      "date": "2025-11-19",
+      "category": "烟花拆产品",
+      "summary": "用可运行样本拆 Gemini3 在游戏、网页、设计和 3D 动画里的真实产品感。",
+      "url": "https://mp.weixin.qq.com/s/gvdZjCZ8xD4OTV2iRy3F7g",
+      "source": "公众号原文"
+    },
+    {
+      "id": "deepseek-rl-diagram",
+      "title": "用流程图对比 DeepSeek-R1、OpenAI o1、Claude",
+      "date": "2025-01",
+      "category": "模型基础",
+      "summary": "用流程图解释强化学习在大模型训练、推理阶段的创新和意义。",
+      "url": "https://mp.weixin.qq.com/s/mdGtOcg1Ru-QOEBn31KhxQ",
+      "source": "公众号原文"
+    },
+    {
+      "id": "ai-memory-palace",
+      "title": "当生化危机的女主在 GitHub 上造了一座 AI 记忆宫殿",
+      "date": "2026-04-07",
+      "category": "AI 记忆",
+      "summary": "从 MemPalace 的开源样本切入，观察长期记忆系统如何走向产品化。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E5%BD%93%E7%94%9F%E5%8C%96%E5%8D%B1%E6%9C%BA%E7%9A%84%E5%A5%B3%E4%B8%BB%E5%9C%A8GitHub%E4%B8%8A%E9%80%A0%E4%BA%86%E4%B8%80%E5%BA%A7AI%E8%AE%B0%E5%BF%86%E5%AE%AB%E6%AE%BF%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "icml-paper-value",
+      "title": "一篇中稿 ICML 的论文究竟是什么含金量？",
+      "date": "2026-05-01",
+      "category": "论文观察",
+      "summary": "围绕顶会论文、审稿机制和研究质量，拆解 AI 论文背后的真实含金量。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E4%B8%80%E7%AF%87%E4%B8%AD%E7%A8%BFICML%E7%9A%84%E8%AE%BA%E6%96%87%E7%A9%B6%E7%AB%9F%E6%98%AF%E4%BB%80%E4%B9%88%E5%90%AB%E9%87%91%E9%87%8F%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "agent-builders-digest-20260408",
+      "title": "AI Agent 落地的两个核心命题 / 创始人亲自写代码 / 打造 AI 软件工厂",
+      "date": "2026-04-08",
+      "category": "AI Builders Digest",
+      "summary": "把 Agent 落地、创始人写代码、软件工厂和硬件选择放在同一个产业视角里观察。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=AI%20Agent%20%E8%90%BD%E5%9C%B0%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%A0%B8%E5%BF%83%E5%91%BD%E9%A2%98%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "hermes-agent",
+      "title": "拆解 Hermes Agent，3 万星的自我进化架构",
+      "date": "2026-04-09",
+      "category": "Agent 架构",
+      "summary": "围绕学习闭环、后置钩子、记忆同步和技能提取，拆一个高星 Agent 项目的系统设计。",
+      "url": "https://note.mowen.cn/detail/enGeDIOQwpnd164bXjTKt",
+      "source": "公开摘要"
+    },
+    {
+      "id": "agentic-thinking",
+      "title": "AI 从 Reasoning / Thinking 转向 Agentic Thinking",
+      "date": "2026-03-27",
+      "category": "Agent 思维",
+      "summary": "从研究者和产业对话出发，理解 Agentic Thinking 如何影响模型和产品路线。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=AI%E4%BB%8E%20Reasoning%20Thinking%20%E5%88%B0%E8%BD%AC%E5%90%91Agentic%20Thinking%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "agent-compute",
+      "title": "Agent 时代需要明智地利用计算资源的人",
+      "date": "2026-04-06",
+      "category": "Agent 工程",
+      "summary": "讨论 Agent 时代的算力、任务分配、模型选择和工程判断。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=Agent%E6%97%B6%E4%BB%A3%E9%9C%80%E8%A6%81%E6%98%8E%E6%99%BA%E5%9C%B0%E5%88%A9%E7%94%A8%E8%AE%A1%E7%AE%97%E8%B5%84%E6%BA%90%E7%9A%84%E4%BA%BA%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "ai-software-ecosystem",
+      "title": "系统工程：AI 软件生态也要面临的问题",
+      "date": "2026-04-09",
+      "category": "系统工程",
+      "summary": "把 AI 软件生态放进系统工程视角，观察工具链、架构和治理问题。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E7%B3%BB%E7%BB%9F%E5%B7%A5%E7%A8%8BAI%E8%BD%AF%E4%BB%B6%E7%94%9F%E6%80%81%E4%B9%9F%E8%A6%81%E9%9D%A2%E4%B8%B4%E7%9A%84%E9%97%AE%E9%A2%98%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "ai-builders-digest-20260404",
+      "title": "当 AI 开始给 AI 打工｜AI Builders Digest 2026-04-04",
+      "date": "2026-04-04",
+      "category": "AI Builders Digest",
+      "summary": "用周报形式整理 AI 工具、Agent 产品和产业信号。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E5%BD%93AI%E5%BC%80%E5%A7%8B%E7%BB%99AI%E6%89%93%E5%B7%A5%20AI%20Builders%20Digest%202026-04-04%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "claude-watch",
+      "title": "Claude Watch 真的有人搞定了，好离谱啊",
+      "date": "2026-03-27",
+      "category": "AI 产品",
+      "summary": "观察 Claude 与可穿戴场景结合的产品想象和实际落点。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=Claude%20Watch%20%E7%9C%9F%E7%9A%84%E6%9C%89%E4%BA%BA%E6%90%9E%E5%AE%9A%E4%BA%86%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "gpt-heart-600-lines",
+      "title": "600 行代码，读懂 GPT 的心脏",
+      "date": "2026-04-08",
+      "category": "模型原理",
+      "summary": "用更低门槛的代码视角拆开 GPT 结构，让模型原理变成能读懂的工程对象。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=600%E8%A1%8C%E4%BB%A3%E7%A0%81%20%E8%AF%BB%E6%87%82GPT%E7%9A%84%E5%BF%83%E8%84%8F%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "agent-replaces-saas",
+      "title": "微软 CEO 的大胆预言：“AI Agent 将替代所有 SaaS”",
+      "date": "2024-12-26",
+      "category": "Agent 产品",
+      "summary": "从 Nadella 的判断切入，讨论 Agent 如何重写 SaaS、数据库与业务逻辑的关系。",
+      "url": "https://www.doit.com.cn/p/526454.html",
+      "source": "公开转载"
+    },
+    {
+      "id": "harness-open-source",
+      "title": "一次 Harness 工程实践，我把它开源出来了！",
+      "date": "2026-03-28",
+      "category": "开源实践",
+      "summary": "把 Claude Code 长任务里的重复错误，沉淀成可复用的 harness 和技能记忆机制。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E4%B8%80%E6%AC%A1Harness%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5%20%E6%88%91%E6%8A%8A%E5%AE%83%E5%BC%80%E6%BA%90%E5%87%BA%E6%9D%A5%E4%BA%86%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "llm-knowledge-base",
+      "title": "使用 LLM 构建个人知识库的最佳实践",
+      "date": "2026-04-03",
+      "category": "知识系统",
+      "summary": "把资料、笔记和模型能力组织成可持续生长的个人知识库，而不是一次性问答。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E4%BD%BF%E7%94%A8LLM%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "ai-community-thinking",
+      "title": "关于 AI 社区，聊聊我的心得体会",
+      "date": "2025-12-28",
+      "category": "社区运营",
+      "summary": "围绕社区定位、内容密度和长期留存，复盘一支烟花 AI 社区的运营思考。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E5%85%B3%E4%BA%8EAI%E7%A4%BE%E5%8C%BA%20%E8%81%8A%E8%81%8A%E6%88%91%E7%9A%84%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "prompt-architecture-diagram",
+      "title": "我是用这个 Prompt 画架构图的",
+      "date": "2025-07-08",
+      "category": "技术图谱",
+      "summary": "把技术理解、图形表达和 Prompt 工程结合，形成可复用的架构图生成方法。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E6%88%91%E6%98%AF%E7%94%A8%E8%BF%99%E4%B8%AAPrompt%E7%94%BB%E6%9E%B6%E6%9E%84%E5%9B%BE%E7%9A%84%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "media-downloader-skill",
+      "title": "有了这个 skill，再也不用手动搜图片和视频了，一句话搞定！",
+      "date": "2026-01-20",
+      "category": "AI 工具",
+      "summary": "把媒体素材搜索、下载和内容生产前置流程封装成可复用的 Skill。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E6%9C%89%E4%BA%86%E8%BF%99%E4%B8%AAskill%20%E5%86%8D%E4%B9%9F%E4%B8%8D%E7%94%A8%E6%89%8B%E5%8A%A8%E6%90%9C%E5%9B%BE%E7%89%87%E5%92%8C%E8%A7%86%E9%A2%91%E4%BA%86%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "sora-openai-founders",
+      "title": "Sora 的离开对 OpenAI 和 AI 创业者都是好事",
+      "date": "2026-03-25",
+      "category": "AI 创业",
+      "summary": "从 Sora 与 OpenAI 的关系变化，讨论大厂和创业公司各自该做什么。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=Sora%20%E7%9A%84%E7%A6%BB%E5%BC%80%E5%AF%B9OpenAI%20%E5%92%8CAI%E5%88%9B%E4%B8%9A%E8%80%85%E9%83%BD%E6%98%AF%E5%A5%BD%E4%BA%8B%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "agent-war-2025",
+      "title": "2025 下半程，Agent War 正式开打！刺刀已然见红！",
+      "date": "2025-05-13",
+      "category": "Agent 战场",
+      "summary": "观察 Agent 产品竞争进入下半场后，模型、工作流和交付体验如何重新洗牌。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=2025%E4%B8%8B%E5%8D%8A%E7%A8%8B%20Agent%20War%E6%AD%A3%E5%BC%8F%E5%BC%80%E6%89%93%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "karpathy-code-agents",
+      "title": "Andrej Karpathy 最新访谈：Code Agents、AutoResearch 与自我闭环",
+      "date": "2026-03-24",
+      "category": "研究观察",
+      "summary": "围绕 Code Agents、AutoResearch 和 AI 自我闭环能力，梳理下一阶段工具边界。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=Andrej%20Karpathy%20Code%20Agents%20AutoResearch%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "harness-project-worth",
+      "title": "为什么这个 Harness 开源项目值得一看？",
+      "date": "2026-03-28",
+      "category": "开源实践",
+      "summary": "围绕 harness 项目的问题意识、使用边界和复用价值，给开发者一个判断框架。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B8%AAHarness%20%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%80%BC%E5%BE%97%E4%B8%80%E7%9C%8B%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    },
+    {
+      "id": "industrial-ai-software",
+      "title": "基于 AI 加持的工业化软件，一个新的赛道来了",
+      "date": "2025-01-16",
+      "category": "AI 产业",
+      "summary": "从工业化软件视角，看 AI 如何进入更严肃、更复杂的生产系统。",
+      "url": "https://weixin.sogou.com/weixin?type=2&query=%E5%9F%BA%E4%BA%8EAI%E5%8A%A0%E6%8C%81%E7%9A%84%E5%B7%A5%E4%B8%9A%E5%8C%96%E8%BD%AF%E4%BB%B6%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI",
+      "source": "搜索原文"
+    }
+  ]
+}

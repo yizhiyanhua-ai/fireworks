@@ -299,17 +299,69 @@ function XFeedPanel() {
 }
 
 function WechatArticlePanel() {
-  const articles = useMemo(() => [...wechatArticles, ...wechatArticles], []);
+  const [archive, setArchive] = useState({
+    updatedAt: '2026-07-09T00:00:00+08:00',
+    source: 'local fallback',
+    articles: wechatArticles,
+  });
+  const sourceArticles = archive.articles?.length ? archive.articles : wechatArticles;
+  const featuredArticle = sourceArticles[0];
+  const articles = useMemo(() => [...sourceArticles, ...sourceArticles], [sourceArticles]);
+
+  useEffect(() => {
+    let active = true;
+
+    fetch('/fireworks/assets/wechat-articles.json', { cache: 'no-store' })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`wechat-articles ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((payload) => {
+        if (active && Array.isArray(payload.articles) && payload.articles.length > 0) {
+          setArchive({
+            ...payload,
+            articles: payload.articles,
+          });
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setArchive({
+            updatedAt: '2026-07-09T00:00:00+08:00',
+            source: 'local fallback',
+            articles: wechatArticles,
+          });
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <section className="wechat-article-panel" aria-label="一支烟花 AI 公众号文章">
       <div className="wechat-article-head">
         <div>
           <span>Official Archive</span>
-          <strong>公众号文章</strong>
+          <strong>公众号文章流</strong>
         </div>
+        <small>{sourceArticles.length} 篇</small>
         <BookOpen size={22} aria-hidden="true" />
       </div>
+      {featuredArticle && (
+        <a className="wechat-article-feature" href={featuredArticle.url} target="_blank" rel="noreferrer">
+          <div>
+            <span>精选样本</span>
+            <strong>{featuredArticle.title}</strong>
+          </div>
+          <em>
+            阅读 <ExternalLink size={13} aria-hidden="true" />
+          </em>
+        </a>
+      )}
       <div className="wechat-article-window">
         <div className="wechat-article-track">
           {articles.map((article, index) => (
@@ -335,6 +387,10 @@ function WechatArticlePanel() {
             </a>
           ))}
         </div>
+      </div>
+      <div className="wechat-article-status">
+        <span>{archive.source?.includes('Official') ? '官方 API 快照' : '公开档案快照'}</span>
+        <span>{archive.updatedAt?.slice(0, 10)}</span>
       </div>
     </section>
   );

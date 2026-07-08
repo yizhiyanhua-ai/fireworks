@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "sync:x-feed": "node scripts/sync-x-feed.mjs",
+    "sync:wechat-articles": "node scripts/sync-wechat-articles.mjs",
     "lint": "eslint ."
   },
   "dependencies": {
