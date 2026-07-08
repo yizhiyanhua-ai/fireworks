@@ -306,7 +306,8 @@ function WechatArticlePanel() {
   });
   const sourceArticles = archive.articles?.length ? archive.articles : wechatArticles;
   const featuredArticle = sourceArticles[0];
-  const articles = useMemo(() => [...sourceArticles, ...sourceArticles], [sourceArticles]);
+  const listArticles = sourceArticles.slice(1);
+  const articles = useMemo(() => [...listArticles, ...listArticles], [listArticles]);
 
   useEffect(() => {
     let active = true;
