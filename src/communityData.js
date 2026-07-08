@@ -52,6 +52,81 @@ export const officialAccount = {
   profileImage: '/fireworks/assets/wechat-content-preview.jpg',
 };
 
+export const wechatArticles = [
+  {
+    id: 'gemini3-product-sample',
+    title: 'Gemini3 首测！游戏、网页、设计、3D、动画制作...超出期待！',
+    date: '2025-11-19',
+    category: '烟花拆产品',
+    summary: '用可运行样本拆 Gemini3 在游戏、网页、设计和 3D 动画里的真实产品感。',
+    url: 'https://mp.weixin.qq.com/s/gvdZjCZ8xD4OTV2iRy3F7g',
+    source: '公众号原文',
+  },
+  {
+    id: 'deepseek-rl-diagram',
+    title: '用流程图对比 DeepSeek-R1、OpenAI o1、Claude',
+    date: '2025-01',
+    category: '模型基础',
+    summary: '用流程图解释强化学习在大模型训练、推理阶段的创新和意义。',
+    url: 'https://mp.weixin.qq.com/s/mdGtOcg1Ru-QOEBn31KhxQ',
+    source: '公众号原文',
+  },
+  {
+    id: 'agent-replaces-saas',
+    title: '微软 CEO 的大胆预言：“AI Agent 将替代所有 SaaS”',
+    date: '2024-12-26',
+    category: 'Agent 产品',
+    summary: '从 Nadella 的判断切入，讨论 Agent 如何重写 SaaS、数据库与业务逻辑的关系。',
+    url: 'https://www.doit.com.cn/p/526454.html',
+    source: '公开转载',
+  },
+  {
+    id: 'agent-war-2025',
+    title: '2025 下半程，Agent War 正式开打！刺刀已然见红！',
+    date: '2025-05-13',
+    category: 'Agent 战场',
+    summary: '观察 Agent 产品竞争进入下半场后，模型、工作流和交付体验如何重新洗牌。',
+    url: 'https://weixin.sogou.com/weixin?type=2&query=2025%E4%B8%8B%E5%8D%8A%E7%A8%8B%20Agent%20War%E6%AD%A3%E5%BC%8F%E5%BC%80%E6%89%93%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI',
+    source: '搜索原文',
+  },
+  {
+    id: 'harness-open-source',
+    title: '一次 Harness 工程实践，我把它开源出来了！',
+    date: '2026-03-28',
+    category: '开源实践',
+    summary: '把 Claude Code 长任务里的重复错误，沉淀成可复用的 harness 和技能记忆机制。',
+    url: 'https://weixin.sogou.com/weixin?type=2&query=%E4%B8%80%E6%AC%A1Harness%E5%B7%A5%E7%A8%8B%E5%AE%9E%E8%B7%B5%20%E6%88%91%E6%8A%8A%E5%AE%83%E5%BC%80%E6%BA%90%E5%87%BA%E6%9D%A5%E4%BA%86%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI',
+    source: '搜索原文',
+  },
+  {
+    id: 'gpt-heart-600-lines',
+    title: '600 行代码，读懂 GPT 的心脏',
+    date: '2026-04-08',
+    category: '模型原理',
+    summary: '用更低门槛的代码视角拆开 GPT 结构，让模型原理变成能读懂的工程对象。',
+    url: 'https://weixin.sogou.com/weixin?type=2&query=600%E8%A1%8C%E4%BB%A3%E7%A0%81%20%E8%AF%BB%E6%87%82GPT%E7%9A%84%E5%BF%83%E8%84%8F%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI',
+    source: '搜索原文',
+  },
+  {
+    id: 'llm-knowledge-base',
+    title: '使用 LLM 构建个人知识库的最佳实践',
+    date: '2026-04-03',
+    category: '知识系统',
+    summary: '把资料、笔记和模型能力组织成可持续生长的个人知识库，而不是一次性问答。',
+    url: 'https://weixin.sogou.com/weixin?type=2&query=%E4%BD%BF%E7%94%A8LLM%E6%9E%84%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI',
+    source: '搜索原文',
+  },
+  {
+    id: 'karpathy-code-agents',
+    title: 'Andrej Karpathy 最新访谈：Code Agents、AutoResearch 与自我闭环',
+    date: '2026-03-24',
+    category: '研究观察',
+    summary: '围绕 Code Agents、AutoResearch 和 AI 自我闭环能力，梳理下一阶段工具边界。',
+    url: 'https://weixin.sogou.com/weixin?type=2&query=Andrej%20Karpathy%20Code%20Agents%20AutoResearch%20%E4%B8%80%E6%94%AF%E7%83%9F%E8%8A%B1AI',
+    source: '搜索原文',
+  },
+];
+
 export const xFeedFallback = {
   account: {
     name: '烟花老师',

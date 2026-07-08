@@ -32,6 +32,7 @@ import {
   projectStats,
   rhythm,
   sourceNotes,
+  wechatArticles,
   xFeedFallback,
 } from './communityData';
 import './styles.css';
@@ -297,6 +298,48 @@ function XFeedPanel() {
   );
 }
 
+function WechatArticlePanel() {
+  const articles = useMemo(() => [...wechatArticles, ...wechatArticles], []);
+
+  return (
+    <section className="wechat-article-panel" aria-label="一支烟花 AI 公众号文章">
+      <div className="wechat-article-head">
+        <div>
+          <span>Official Archive</span>
+          <strong>公众号文章</strong>
+        </div>
+        <BookOpen size={22} aria-hidden="true" />
+      </div>
+      <div className="wechat-article-window">
+        <div className="wechat-article-track">
+          {articles.map((article, index) => (
+            <a
+              className="wechat-article-card"
+              href={article.url}
+              target="_blank"
+              rel="noreferrer"
+              key={`${article.id}-${index}`}
+            >
+              <div className="wechat-article-meta">
+                <span>{article.date}</span>
+                <span>{article.source}</span>
+              </div>
+              <h3>{article.title}</h3>
+              <p>{article.summary}</p>
+              <div className="wechat-article-foot">
+                <span>{article.category}</span>
+                <span>
+                  阅读 <ExternalLink size={13} aria-hidden="true" />
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function App() {
   return (
     <>
@@ -399,6 +442,7 @@ function App() {
             </div>
             <aside className="official-media" aria-label="公众号入口">
               <XFeedPanel />
+              <WechatArticlePanel />
               <div className="qr-card compact">
                 <img src={officialAccount.qrImage} alt="一支烟花 AI 公众号二维码" />
                 <div>
