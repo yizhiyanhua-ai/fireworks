@@ -393,14 +393,14 @@ function App() {
               </div>
             </div>
             <aside className="official-media" aria-label="公众号入口">
-              <div className="qr-card">
+              <XFeedPanel />
+              <div className="qr-card compact">
                 <img src={officialAccount.qrImage} alt="一支烟花 AI 公众号二维码" />
                 <div>
                   <strong>扫码关注公众号</strong>
                   <span>硬核 AI 内容、Agent 观察、开源项目和社群共创记录</span>
                 </div>
               </div>
-              <XFeedPanel />
             </aside>
           </div>
           <div className="content-track-grid" aria-label="公众号内容雷达">

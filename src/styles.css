@@ -445,10 +445,9 @@ h1 {
 
 .official-media {
   position: relative;
-  display: grid;
-  grid-template-columns: 210px minmax(0, 1fr);
-  gap: 18px;
-  padding: 22px;
+  display: block;
+  min-height: 640px;
+  padding: 18px;
   overflow: hidden;
 }
 
@@ -474,6 +473,23 @@ h1 {
   background: rgba(7, 8, 18, 0.74);
 }
 
+.qr-card.compact {
+  position: absolute;
+  top: 34px;
+  right: 34px;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 128px);
+  gap: 10px;
+  align-items: center;
+  width: min(236px, calc(100% - 68px));
+  padding: 9px;
+  border-color: rgba(226, 232, 240, 0.2);
+  background: rgba(2, 6, 23, 0.78);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(14px);
+}
+
 .qr-card img {
   display: block;
   width: 100%;
@@ -481,6 +497,10 @@ h1 {
   object-fit: cover;
   border-radius: 8px;
   background: #fff;
+}
+
+.qr-card.compact img {
+  border-radius: 6px;
 }
 
 .qr-card strong,
@@ -494,11 +514,23 @@ h1 {
   font-size: 18px;
 }
 
+.qr-card.compact strong {
+  margin-top: 0;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
 .qr-card span {
   margin-top: 6px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.55;
+}
+
+.qr-card.compact span {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.45;
 }
 
 .phone-frame {
@@ -526,8 +558,9 @@ h1 {
   z-index: 1;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  min-height: 560px;
-  max-height: 620px;
+  min-height: 604px;
+  height: 100%;
+  max-height: none;
   overflow: hidden;
   border: 1px solid rgba(59, 130, 246, 0.32);
   border-radius: 8px;
@@ -546,7 +579,7 @@ h1 {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  padding: 14px 16px;
+  padding: 22px 286px 22px 28px;
   border-bottom: 1px solid rgba(51, 65, 85, 0.78);
   background: rgba(2, 6, 23, 0.62);
   backdrop-filter: blur(12px);
@@ -556,7 +589,7 @@ h1 {
 .x-feed-status span {
   color: var(--dim);
   font-family: "SF Mono", "Fira Code", ui-monospace, monospace;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -565,7 +598,8 @@ h1 {
   display: block;
   margin-top: 4px;
   color: var(--text);
-  font-size: 18px;
+  font-size: clamp(26px, 3vw, 38px);
+  letter-spacing: 0;
 }
 
 .x-feed-header a {
@@ -573,12 +607,12 @@ h1 {
   align-items: center;
   gap: 6px;
   flex: 0 0 auto;
-  min-height: 32px;
-  padding: 7px 9px;
+  min-height: 44px;
+  padding: 10px 13px;
   border: 1px solid rgba(59, 130, 246, 0.34);
   border-radius: 8px;
   color: #bfdbfe;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
   background: rgba(29, 78, 216, 0.12);
 }
@@ -613,9 +647,9 @@ h1 {
 
 .x-feed-track {
   display: grid;
-  gap: 12px;
-  padding: 18px;
-  animation: x-feed-scroll 26s linear infinite;
+  gap: 18px;
+  padding: 28px 38px 28px;
+  animation: x-feed-scroll 30s linear infinite;
 }
 
 .x-feed-panel:hover .x-feed-track {
@@ -624,7 +658,7 @@ h1 {
 
 .x-post-card {
   display: block;
-  padding: 15px;
+  padding: 22px;
   border: 1px solid rgba(148, 163, 184, 0.18);
   border-radius: 8px;
   color: inherit;
@@ -645,16 +679,19 @@ h1 {
   gap: 12px;
   color: var(--blue);
   font-family: "SF Mono", "Fira Code", ui-monospace, monospace;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 900;
   text-transform: uppercase;
 }
 
 .x-post-card p {
-  margin: 11px 0 0;
+  margin: 16px 0 0;
   color: #e2e8f0;
-  font-size: 14px;
+  font-size: clamp(18px, 1.7vw, 26px);
   line-height: 1.72;
+  text-decoration: underline;
+  text-decoration-color: rgba(148, 163, 184, 0.36);
+  text-underline-offset: 7px;
   text-wrap: pretty;
 }
 
@@ -662,15 +699,15 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 12px;
+  margin-top: 18px;
 }
 
 .x-post-tags span {
-  padding: 5px 7px;
+  padding: 7px 10px;
   border: 1px solid rgba(59, 130, 246, 0.26);
   border-radius: 8px;
   color: #bfdbfe;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 800;
   background: rgba(29, 78, 216, 0.12);
 }
@@ -678,6 +715,7 @@ h1 {
 .x-feed-status {
   border-top: 1px solid rgba(51, 65, 85, 0.78);
   border-bottom: 0;
+  padding: 16px 28px;
 }
 
 @keyframes x-feed-scroll {
@@ -1969,7 +2007,7 @@ footer {
   }
 
   .official-media {
-    grid-template-columns: 240px minmax(0, 1fr);
+    min-height: 640px;
   }
 
   .community-shell {
@@ -2113,18 +2151,61 @@ footer {
   }
 
   .official-media {
-    grid-template-columns: 1fr;
+    min-height: 620px;
+    padding: 12px;
   }
 
-  .qr-card {
-    display: grid;
-    grid-template-columns: 150px minmax(0, 1fr);
-    gap: 18px;
-    align-items: center;
+  .qr-card.compact {
+    top: 24px;
+    right: 24px;
+    grid-template-columns: 58px minmax(0, 96px);
+    width: 178px;
+    padding: 7px;
   }
 
-  .qr-card strong {
-    margin-top: 0;
+  .qr-card.compact strong {
+    font-size: 12px;
+  }
+
+  .qr-card.compact span {
+    font-size: 10px;
+  }
+
+  .x-feed-panel {
+    min-height: 596px;
+  }
+
+  .x-feed-header {
+    align-items: flex-start;
+    padding: 18px 214px 18px 18px;
+  }
+
+  .x-feed-header strong {
+    font-size: 22px;
+  }
+
+  .x-feed-header a {
+    min-height: 36px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .x-feed-track {
+    gap: 14px;
+    padding: 22px 18px;
+  }
+
+  .x-post-card {
+    padding: 16px;
+  }
+
+  .x-post-card p {
+    font-size: 17px;
+    text-underline-offset: 5px;
+  }
+
+  .x-post-tags span {
+    font-size: 11px;
   }
 
   .phone-frame {
@@ -2188,9 +2269,13 @@ footer {
 
   .community-copy,
   .belief-panel,
-  .official-copy,
-  .official-media {
+  .official-copy {
     padding: 24px;
+  }
+
+  .official-media {
+    min-height: 600px;
+    padding: 10px;
   }
 
   .community-copy h2 {
@@ -2215,8 +2300,36 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .qr-card {
-    grid-template-columns: 1fr;
+  .qr-card.compact {
+    top: 18px;
+    right: 18px;
+    grid-template-columns: 50px minmax(0, 70px);
+    width: 140px;
+  }
+
+  .qr-card.compact span {
+    display: none;
+  }
+
+  .x-feed-header {
+    padding: 16px 166px 16px 16px;
+  }
+
+  .x-feed-header strong {
+    font-size: 18px;
+    overflow-wrap: anywhere;
+  }
+
+  .x-feed-header a {
+    display: none;
+  }
+
+  .x-feed-status {
+    padding: 12px 16px;
+  }
+
+  .x-feed-status span {
+    font-size: 9px;
   }
 
   .phone-frame {
