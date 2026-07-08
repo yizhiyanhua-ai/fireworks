@@ -291,7 +291,7 @@ function XFeedPanel() {
       </div>
       <div className="x-feed-status">
         <span>读取公开 JSON 快照</span>
-        <span>MCP/API 可定时覆盖</span>
+        <span>X API 每 6 小时同步</span>
       </div>
     </div>
   );

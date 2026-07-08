@@ -22,4 +22,18 @@ export default [
       'no-unused-vars': 'off',
     },
   },
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2024,
+      globals: {
+        ...globals.node,
+        fetch: 'readonly',
+        URL: 'readonly',
+      },
+      parserOptions: {
+        sourceType: 'module',
+      },
+    },
+  },
 ];

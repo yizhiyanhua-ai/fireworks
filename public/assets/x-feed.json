@@ -4,8 +4,8 @@
     "handle": "teach_fireworks",
     "url": "https://x.com/teach_fireworks"
   },
-  "updatedAt": "2026-07-07T00:00:00+08:00",
-  "source": "static snapshot; replace this file from X MCP/API sync",
+  "updatedAt": "2026-07-08T00:00:00+08:00",
+  "source": "static snapshot; scheduled sync can replace this file from X API",
   "posts": [
     {
       "id": "2050190799837741377",
@@ -37,6 +37,134 @@
       "createdAt": "本地归档",
       "text": "Goals 不是一个小功能，而是长任务委托的入口。真正重要的是任务能否跨 session 持续、自己验证，并在完成条件满足时停下来。",
       "tags": ["Goals", "Verification", "Automation"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "2051095942213025811",
+      "url": "https://x.com/teach_fireworks/status/2051095942213025811",
+      "createdAt": "本地归档",
+      "text": "一个 Codex 账号很快不够用，本质上是任务并行度变了：探索、实现、修复、复盘开始同时发生。",
+      "tags": ["Codex", "Parallel", "Work System"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-agent-harness",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "很多长任务 Agent 做不稳，不是模型不够强，而是 harness 不对。状态、工具、检查点和失败恢复才是地基。",
+      "tags": ["Harness", "Agent Infra", "State"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-agent-evals",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "Agent eval 分数差异，很多时候不是模型差，而是基础设施差：数据、回放、观测、判分口径都在影响结果。",
+      "tags": ["Eval", "Infrastructure", "Observability"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-rag-ux",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "RAG 系统的 UX 问题往往藏在检索链路里：用户看到的是答案，真正出错的是上下文进入模型前的排序和裁剪。",
+      "tags": ["RAG", "UX", "Context"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-memory-layer",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "Memory 不是把历史全塞回 prompt，而是知道什么该保留、什么该遗忘、什么时候该被召回。",
+      "tags": ["Memory", "Context", "Agent"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-goals-loop",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "Codex Goals 改变长任务 vibe coding 的上限，因为它把“继续做”从人工催促变成可验证循环。",
+      "tags": ["Goals", "Loop", "Verification"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-content-workflow",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "把 Codex 当成图文工作流的一部分后，代码、图片、页面、验证可以被串成同一个交付链路。",
+      "tags": ["Codex", "Content Workflow", "Automation"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-team-agent",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "真正让 Coding Agent 进入团队日常的，不是 demo，而是把它塞进一堆没人想做但必须做的工作里。",
+      "tags": ["Team Workflow", "Automation", "Agent"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-agent-infra-software",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "AI 业务越往严肃场景走，新的 Agent Infra Software 机会越明显：权限、隔离、审计、回放都会变成产品点。",
+      "tags": ["Agent Infra", "Enterprise", "Safety"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-ai-product-content",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "好的 AI 产品内容不只是功能播报，而是把能力承诺讲清楚：用户能少做什么、快做什么、交付什么。",
+      "tags": ["AI Product", "Positioning", "Content"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-programmatic-seo",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "别把 impressions 当流量，程序化 SEO 真正启发是把内容生产拆成可复用模板、信号和分发系统。",
+      "tags": ["Growth", "SEO", "System"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-content-system",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "高表现内容不是单条运气，它更像系统信号：选题、结构、标题、分发和反馈回路共同作用。",
+      "tags": ["Content System", "Growth", "Feedback"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-agent-loop",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "Agent Loop 的关键不是循环本身，而是每一轮有没有可观察状态、明确停止条件和可追踪副作用。",
+      "tags": ["Agent Loop", "State", "Stop Condition"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-workflow-surface",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "Claude Code、Codex、Cursor 的差异会越来越落在 workflow surface：任务怎么开始、怎么暂停、怎么恢复、怎么验收。",
+      "tags": ["Claude Code", "Codex", "Cursor"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-skill-memory",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "AI 工具链的记忆层会越来越重要，因为真正浪费 token 的往往是重复解释项目背景和操作习惯。",
+      "tags": ["Skill Memory", "Tools", "Context"],
+      "metrics": "X archive"
+    },
+    {
+      "id": "archive-open-source-community",
+      "url": "https://x.com/teach_fireworks",
+      "createdAt": "本地归档",
+      "text": "开源项目最好的社区入口不是 README 热闹，而是别人能直接 fork、运行、复用，并把问题继续带回来。",
+      "tags": ["Open Source", "Community", "Reuse"],
       "metrics": "X archive"
     }
   ]
