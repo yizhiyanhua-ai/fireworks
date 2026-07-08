@@ -1,0 +1,33 @@
+{
+  "name": "一支烟花 AI 社区",
+  "short_name": "烟花 AI",
+  "start_url": "/fireworks/",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#0f0f1a",
+  "description": "硬核 AI 内容、开源项目和极客共创的 AI 实践者社区。",
+  "icons": [
+    {
+      "src": "/fireworks/assets/community-logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/fireworks/favicon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/fireworks/assets/community-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/fireworks/assets/community-logo-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

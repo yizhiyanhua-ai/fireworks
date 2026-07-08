@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="一支烟花 AI 社区">
+  <rect width="64" height="64" rx="14" fill="#0f0f1a"/>
+  <path d="M32 42V18" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32 20c-9 3-15 9-18 18" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M32 20c9 3 15 9 18 18" stroke="#f97316" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M32 20c-3 8-2 15 2 23" stroke="#a855f7" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M32 20c3 8 2 15-2 23" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <circle cx="32" cy="18" r="3" fill="#eab308"/>
+  <circle cx="14" cy="38" r="2.5" fill="#3b82f6"/>
+  <circle cx="50" cy="38" r="2.5" fill="#f97316"/>
+  <circle cx="34" cy="43" r="2.5" fill="#a855f7"/>
+  <circle cx="30" cy="43" r="2.5" fill="#10b981"/>
+</svg>
