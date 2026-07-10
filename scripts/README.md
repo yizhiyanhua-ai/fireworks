@@ -32,3 +32,30 @@ The expected shape is:
   ]
 }
 ```
+
+Run the authenticated sync with:
+
+```bash
+X_BEARER_TOKEN=... npm run sync:x-feed
+```
+
+## WeChat Articles
+
+The homepage reads the public article archive from `public/assets/wechat-articles.json`.
+Use an official account access token or app credentials outside the browser bundle:
+
+```bash
+WECHAT_ACCESS_TOKEN=... npm run sync:wechat-articles
+```
+
+## GitHub Project Metrics
+
+Stars and forks are loaded from `public/assets/github-projects.json`. Refresh the eight
+featured repositories through GitHub's public API:
+
+```bash
+npm run sync:github-projects
+```
+
+Set `GITHUB_TOKEN` in CI to avoid the unauthenticated API rate limit. Every generated
+snapshot includes `updatedAt`, and the site labels it as a dated public snapshot.

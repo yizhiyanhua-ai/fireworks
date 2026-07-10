@@ -1,48 +1,39 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   ArrowDown,
-  ArrowRight,
   ArrowUpRight,
   BookOpen,
-  Boxes,
   CalendarDays,
   Check,
-  ChevronRight,
   Code2,
   Compass,
   ExternalLink,
-  Flame,
   Github,
-  GitFork,
-  Globe2,
   Layers3,
   Menu,
   MessageCircle,
   Network,
-  Newspaper,
   Radio,
   Rocket,
   ShieldCheck,
   Sparkles,
-  Star,
   Terminal,
   X,
-  Zap,
 } from 'lucide-react';
 import {
   communityBeliefs,
   communityIntro,
   contentTracks,
-  featuredProjects,
   officialAccount,
   operatingPrinciples,
   projectStats,
   rhythm,
   sourceNotes,
-  wechatArticles,
-  xFeedFallback,
 } from './communityData';
+import { ProductLab } from './components/ProductLab';
+import { SectionIntro } from './components/SectionIntro';
+import { SignalSection } from './components/SignalSection';
 import './styles.css';
 
 const navItems = [
@@ -61,32 +52,6 @@ const principleIcons = {
 };
 
 const trackIcons = [Sparkles, Terminal, Compass, Code2];
-
-function useRemoteJson(path, fallback) {
-  const [data, setData] = useState(fallback);
-
-  useEffect(() => {
-    let active = true;
-
-    fetch(`${import.meta.env.BASE_URL}${path}`, { cache: 'no-store' })
-      .then((response) => {
-        if (!response.ok) throw new Error(`${path}: ${response.status}`);
-        return response.json();
-      })
-      .then((payload) => {
-        if (active) setData(payload);
-      })
-      .catch(() => {
-        if (active) setData(fallback);
-      });
-
-    return () => {
-      active = false;
-    };
-  }, [fallback, path]);
-
-  return data;
-}
 
 function useReveal() {
   useEffect(() => {
@@ -234,295 +199,14 @@ function LaunchTicker() {
   return (
     <div className="launch-ticker" aria-label="社区重点方向">
       <div className="launch-ticker-track">
-        {[...items, ...items].map((item, index) => (
-          <span key={`${item}-${index}`}>
-            <i /> {item}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function SectionIntro({ eyebrow, title, body, aside }) {
-  return (
-    <div className="section-intro" data-reveal>
-      <div>
-        <span className="eyebrow">{eyebrow}</span>
-        <h2>{title}</h2>
-      </div>
-      <div className="section-intro-copy">
-        <p>{body}</p>
-        {aside && <span className="section-note">{aside}</span>}
-      </div>
-    </div>
-  );
-}
-
-function GeneratedPreview({ project }) {
-  const rows = project.highlights.slice(0, 3);
-  return (
-    <div className={`generated-preview accent-${project.accent}`} aria-hidden="true">
-      <div className="generated-toolbar">
-        <span />
-        <span />
-        <span />
-        <strong>{project.productType}</strong>
-      </div>
-      <div className="generated-layout">
-        <div className="generated-side">
-          {rows.map((row, index) => (
-            <span key={row} className={index === 0 ? 'active' : ''}>
-              0{index + 1} {row}
-            </span>
-          ))}
+        <div className="launch-ticker-copy">
+          {items.map((item) => <span key={item}><i /> {item}</span>)}
         </div>
-        <div className="generated-canvas">
-          <span className="node node-a">INPUT</span>
-          <span className="node node-b">AGENT</span>
-          <span className="node node-c">OUTPUT</span>
-          <i className="line line-a" />
-          <i className="line line-b" />
-          <div className="generated-result">
-            <small>BUILD RESULT</small>
-            <strong>{project.tagline}</strong>
-          </div>
+        <div className="launch-ticker-copy" aria-hidden="true">
+          {items.map((item) => <span key={`duplicate-${item}`}><i /> {item}</span>)}
         </div>
       </div>
     </div>
-  );
-}
-
-function ProductVisual({ project }) {
-  if (!project.previewImage) return <GeneratedPreview project={project} />;
-
-  return (
-    <figure className="product-visual">
-      <img src={project.previewImage} alt={project.previewAlt || `${project.name} 产品截图`} />
-      <figcaption>
-        <span>{project.previewSource || 'README PRODUCT PREVIEW'}</span>
-        <a href={project.url} target="_blank" rel="noreferrer">
-          查看源项目 <ExternalLink size={13} aria-hidden="true" />
-        </a>
-      </figcaption>
-    </figure>
-  );
-}
-
-function ProductLab() {
-  const categories = useMemo(
-    () => ['全部', ...Array.from(new Set(featuredProjects.map((project) => project.category)))],
-    [],
-  );
-  const [category, setCategory] = useState('全部');
-  const filtered = category === '全部' ? featuredProjects : featuredProjects.filter((project) => project.category === category);
-  const [selectedName, setSelectedName] = useState(featuredProjects[0].name);
-  const selected = filtered.find((project) => project.name === selectedName) || filtered[0];
-
-  function selectCategory(nextCategory) {
-    setCategory(nextCategory);
-    const nextProjects = nextCategory === '全部'
-      ? featuredProjects
-      : featuredProjects.filter((project) => project.category === nextCategory);
-    setSelectedName(nextProjects[0].name);
-  }
-
-  return (
-    <section className="product-lab" id="products">
-      <div className="section-wrap">
-        <SectionIntro
-          eyebrow="01 / AI PRODUCT LAB"
-          title="社区的价值，要落到可以被使用的产品上。"
-          body="这里展示的每个项目都来自真实工作流：观察问题、形成方法、做成工具、公开验证。你看到的不只是仓库列表，而是一组持续进化的 AI 产品。"
-          aside={`${featuredProjects.length} PRODUCTS / OPEN SOURCE`}
-        />
-        <div className="product-filter" role="tablist" aria-label="按产品方向筛选">
-          {categories.map((item) => (
-            <button
-              type="button"
-              role="tab"
-              aria-selected={category === item}
-              className={category === item ? 'active' : ''}
-              key={item}
-              onClick={() => selectCategory(item)}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-        <div className="product-stage" data-reveal>
-          <div className="product-stage-copy">
-            <div className="product-stage-meta">
-              <span>{selected.launchRank}</span>
-              <span>{selected.productType}</span>
-              <span>{selected.language}</span>
-            </div>
-            <h3>{selected.name}</h3>
-            <p className="product-tagline">{selected.tagline}</p>
-            <p className="product-outcome">{selected.outcome}</p>
-            <div className="product-usecase">
-              <small>适合用在</small>
-              <strong>{selected.useCase}</strong>
-            </div>
-            <ul className="product-highlights">
-              {selected.highlights.map((highlight) => (
-                <li key={highlight}>
-                  <Zap size={14} aria-hidden="true" /> {highlight}
-                </li>
-              ))}
-            </ul>
-            <div className="product-metrics">
-              <span><Star size={15} aria-hidden="true" /> {selected.stars.toLocaleString()} Stars</span>
-              <span><GitFork size={15} aria-hidden="true" /> {selected.forks.toLocaleString()} Forks</span>
-            </div>
-            <div className="product-actions">
-              {selected.demo && (
-                <a className="action action-primary" href={selected.demo} target="_blank" rel="noreferrer">
-                  体验产品 <ArrowUpRight size={15} aria-hidden="true" />
-                </a>
-              )}
-              <a className="action action-outline" href={selected.url} target="_blank" rel="noreferrer">
-                <Github size={17} aria-hidden="true" /> 查看源码
-              </a>
-            </div>
-          </div>
-          <ProductVisual project={selected} />
-        </div>
-        <div className="product-index" aria-label="AI 产品列表">
-          {filtered.map((project, index) => (
-            <button
-              type="button"
-              className={selected.name === project.name ? 'active' : ''}
-              onClick={() => setSelectedName(project.name)}
-              key={project.name}
-            >
-              <span className="product-index-number">{String(index + 1).padStart(2, '0')}</span>
-              <span className={`product-index-icon accent-${project.accent}`}>
-                {project.previewImage ? <img src={project.previewImage} alt="" /> : <Boxes size={22} />}
-              </span>
-              <span className="product-index-name">
-                <strong>{project.name}</strong>
-                <small>{project.tagline}</small>
-              </span>
-              <span className="product-index-stat">
-                <Star size={13} aria-hidden="true" /> {project.stars.toLocaleString()}
-              </span>
-              <ChevronRight size={18} aria-hidden="true" />
-            </button>
-          ))}
-        </div>
-        <a className="all-projects-link" href="https://github.com/orgs/yizhiyanhua-ai/repositories" target="_blank" rel="noreferrer">
-          浏览全部公开仓库 <ArrowRight size={17} aria-hidden="true" />
-        </a>
-      </div>
-    </section>
-  );
-}
-
-function XSignal({ feed }) {
-  const posts = feed.posts?.length ? feed.posts.slice(0, 20) : xFeedFallback.posts;
-  const loop = [...posts, ...posts];
-
-  return (
-    <article className="signal-column signal-x">
-      <div className="signal-head">
-        <div>
-          <span>X / FIELD NOTES</span>
-          <strong>@{feed.account?.handle || 'teach_fireworks'}</strong>
-        </div>
-        <a href={feed.account?.url || xFeedFallback.account.url} target="_blank" rel="noreferrer" aria-label="在 X 查看">
-          <ArrowUpRight size={18} />
-        </a>
-      </div>
-      <div className="signal-window">
-        <div className="signal-track x-track">
-          {loop.map((post, index) => (
-            <a className="x-signal-item" href={post.url} target="_blank" rel="noreferrer" key={`${post.id}-${index}`}>
-              <div>
-                <span>{post.createdAt}</span>
-                <small>{post.metrics}</small>
-              </div>
-              <p>{post.text}</p>
-              <footer>
-                {post.tags?.slice(0, 3).map((tag) => <span key={tag}>#{tag}</span>)}
-              </footer>
-            </a>
-          ))}
-        </div>
-      </div>
-      <div className="signal-foot">
-        <span><i /> LIVE SNAPSHOT</span>
-        <span>{posts.length} SIGNALS</span>
-      </div>
-    </article>
-  );
-}
-
-function ArticleSignal({ archive }) {
-  const articles = archive.articles?.length ? archive.articles : wechatArticles;
-  const loop = [...articles, ...articles];
-
-  return (
-    <article className="signal-column signal-wechat">
-      <div className="signal-head signal-head-qr">
-        <div>
-          <span>WECHAT / DEEP RESEARCH</span>
-          <strong>一支烟花 AI</strong>
-        </div>
-        <div className="mini-qr">
-          <img src={officialAccount.qrImage} alt="一支烟花 AI 公众号二维码" />
-          <span>扫码关注</span>
-        </div>
-      </div>
-      <div className="signal-window">
-        <div className="signal-track article-track">
-          {loop.map((article, index) => (
-            <a className="article-signal-item" href={article.url} target="_blank" rel="noreferrer" key={`${article.id}-${index}`}>
-              <div className="article-date">
-                <span>{article.date?.slice(5, 10).replace('-', '.')}</span>
-                <small>{article.date?.slice(0, 4)}</small>
-              </div>
-              <div>
-                <span className="article-category">{article.category}</span>
-                <h3>{article.title}</h3>
-                <p>{article.summary}</p>
-              </div>
-              <ArrowUpRight size={17} aria-hidden="true" />
-            </a>
-          ))}
-        </div>
-      </div>
-      <div className="signal-foot">
-        <span><Newspaper size={13} /> PUBLIC ARCHIVE</span>
-        <span>{articles.length} ARTICLES</span>
-      </div>
-    </article>
-  );
-}
-
-function SignalSection() {
-  const feed = useRemoteJson('assets/x-feed.json', xFeedFallback);
-  const archive = useRemoteJson('assets/wechat-articles.json', {
-    updatedAt: '2026-07-09T00:00:00+08:00',
-    source: 'local fallback',
-    articles: wechatArticles,
-  });
-
-  return (
-    <section className="signals" id="signals">
-      <div className="section-wrap">
-        <SectionIntro
-          eyebrow="02 / LIVE INTELLIGENCE"
-          title="产品在仓库里生长，判断在内容里持续更新。"
-          body="短观察进入 X，长研究沉淀到公众号。两条公开内容流共同记录我们如何理解 Agent、AI 产品与模型基础设施。"
-          aside="PUBLIC FEEDS / CONTINUOUSLY UPDATED"
-        />
-        <div className="signal-board" data-reveal>
-          <XSignal feed={feed} />
-          <ArticleSignal archive={archive} />
-        </div>
-      </div>
-    </section>
   );
 }
 

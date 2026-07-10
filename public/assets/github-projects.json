@@ -1,0 +1,38 @@
+{
+  "updatedAt": "2026-07-10T06:12:50.915Z",
+  "source": "GitHub REST API public repository snapshot",
+  "projects": {
+    "fireworks-tech-graph": {
+      "stars": 8461,
+      "forks": 727
+    },
+    "fireworks-design": {
+      "stars": 82,
+      "forks": 3
+    },
+    "fireworks-skill-memory": {
+      "stars": 92,
+      "forks": 7
+    },
+    "fireworks-ai-tools-memory": {
+      "stars": 0,
+      "forks": 0
+    },
+    "media-downloader": {
+      "stars": 391,
+      "forks": 44
+    },
+    "skills-updater": {
+      "stars": 166,
+      "forks": 15
+    },
+    "chuinb-skill": {
+      "stars": 91,
+      "forks": 7
+    },
+    "youtube-ai-digest": {
+      "stars": 52,
+      "forks": 6
+    }
+  }
+}

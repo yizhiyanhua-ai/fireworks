@@ -9,7 +9,9 @@
     "preview": "vite preview --host 0.0.0.0",
     "sync:x-feed": "node scripts/sync-x-feed.mjs",
     "sync:wechat-articles": "node scripts/sync-wechat-articles.mjs",
-    "lint": "eslint ."
+    "sync:github-projects": "node scripts/sync-github-projects.mjs",
+    "lint": "eslint .",
+    "test": "node --test"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
