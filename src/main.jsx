@@ -1,26 +1,34 @@
 import { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
   BookOpen,
   Boxes,
   CalendarDays,
-  ChevronUp,
+  Check,
+  ChevronRight,
   Code2,
   Compass,
   ExternalLink,
+  Flame,
   Github,
   GitFork,
   Globe2,
   Layers3,
-  Lightbulb,
-  LockKeyhole,
+  Menu,
   MessageCircle,
   Network,
+  Newspaper,
+  Radio,
   Rocket,
   ShieldCheck,
+  Sparkles,
   Star,
-  TerminalSquare,
-  Users,
+  Terminal,
+  X,
+  Zap,
 } from 'lucide-react';
 import {
   communityBeliefs,
@@ -37,705 +45,685 @@ import {
 } from './communityData';
 import './styles.css';
 
-const icons = {
-  开源开放: Github,
-  共建共治: Users,
-  质量优先: ShieldCheck,
-  长期主义: Rocket,
-  安全合规: LockKeyhole,
-};
-
 const navItems = [
-  ['公众号', '#official-account'],
-  ['社区介绍', '#community'],
-  ['开源项目', '#projects'],
-  ['社区理念', '#principles'],
-  ['学习共创', '#rhythm'],
+  ['产品', '#products'],
+  ['动态', '#signals'],
+  ['社区', '#community'],
+  ['方法', '#principles'],
 ];
 
-function Stat({ value, label }) {
-  return (
-    <div className="stat">
-      <strong>{value}</strong>
-      <span>{label}</span>
-    </div>
-  );
+const principleIcons = {
+  开源开放: Github,
+  共建共治: Network,
+  质量优先: ShieldCheck,
+  长期主义: Rocket,
+  安全合规: Check,
+};
+
+const trackIcons = [Sparkles, Terminal, Compass, Code2];
+
+function useRemoteJson(path, fallback) {
+  const [data, setData] = useState(fallback);
+
+  useEffect(() => {
+    let active = true;
+
+    fetch(`${import.meta.env.BASE_URL}${path}`, { cache: 'no-store' })
+      .then((response) => {
+        if (!response.ok) throw new Error(`${path}: ${response.status}`);
+        return response.json();
+      })
+      .then((payload) => {
+        if (active) setData(payload);
+      })
+      .catch(() => {
+        if (active) setData(fallback);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [fallback, path]);
+
+  return data;
 }
 
-function ProductPreview({ project, compact = false }) {
-  const previewRows = {
-    diagram: ['agent graph', 'rag pipeline', 'deploy map'],
-    design: ['brief intake', 'variant panel', 'critique merge'],
-    memory: ['skill note', 'context layer', 'recall path'],
-    tools: ['cli index', 'workflow card', 'search cache'],
-    media: ['image search', 'clip queue', 'asset board'],
-    registry: ['scan skills', 'update plan', 'release check'],
-    research: ['terms map', 'value chain', 'players list'],
-    video: ['chapter cut', 'insight card', 'study notes'],
-  };
-  const rows = previewRows[project.previewType] || previewRows.tools;
+function useReveal() {
+  useEffect(() => {
+    const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
+    if (!('IntersectionObserver' in window)) {
+      nodes.forEach((node) => node.classList.add('is-visible'));
+      return undefined;
+    }
 
-  return (
-    <div className={`product-preview preview-${project.previewType}${compact ? ' compact' : ''}`} aria-hidden="true">
-      <div className="preview-window-bar">
-        <span />
-        <span />
-        <span />
-      </div>
-      {project.previewImage && !compact ? (
-        <div className="preview-image-shell">
-          <img src={project.previewImage} alt={project.previewAlt} loading="lazy" />
-          <div className="preview-image-caption">
-            <span>{project.previewSource}</span>
-            <strong>{project.tagline}</strong>
-          </div>
-        </div>
-      ) : (
-        <div className="preview-canvas">
-          <div className="preview-sidebar">
-            {rows.map((row) => (
-              <span key={row}>{row}</span>
-            ))}
-          </div>
-          <div className="preview-main">
-            <div className="preview-command">{project.tagline}</div>
-            <div className="preview-graph">
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="preview-output">
-              <strong>{project.productType}</strong>
-              <span>{project.highlights[0]}</span>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ProjectCard({ project }) {
-  if (!project.flagship) {
-    return (
-      <article className={`project-card product-row accent-${project.accent}`}>
-        <div className="product-rank">
-          <span>{project.launchRank}</span>
-          <strong>
-            <ChevronUp size={14} aria-hidden="true" /> {project.upvotes}
-          </strong>
-        </div>
-        <ProductPreview project={project} compact />
-        <div className="product-row-body">
-          <div className="project-topline">
-            <span>{project.productType}</span>
-            <span>{project.category}</span>
-          </div>
-          <div className="project-title-row">
-            <h3>{project.name}</h3>
-            <span className="project-language">{project.language}</span>
-          </div>
-          <p className="project-tagline">{project.tagline}</p>
-          <p className="project-outcome">{project.outcome}</p>
-          <div className="feature-chip-row">
-            {project.highlights.slice(0, 3).map((highlight) => (
-              <span key={highlight}>{highlight}</span>
-            ))}
-          </div>
-          <div className="project-actions">
-            {project.demo && (
-              <a className="launch-link" href={project.demo} target="_blank" rel="noreferrer">
-                体验 Demo <ExternalLink size={15} aria-hidden="true" />
-              </a>
-            )}
-            <a href={project.url} target="_blank" rel="noreferrer">
-              查看开源 <ExternalLink size={15} aria-hidden="true" />
-            </a>
-          </div>
-        </div>
-      </article>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
     );
-  }
+
+    nodes.forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
+  }, []);
+}
+
+function Logo({ compact = false }) {
+  return (
+    <span className={`logo${compact ? ' logo-compact' : ''}`}>
+      <img src={`${import.meta.env.BASE_URL}assets/community-logo.png`} alt="" />
+      {!compact && (
+        <span>
+          <strong>一支烟花 AI</strong>
+          <small>OPEN PRODUCT COMMUNITY</small>
+        </span>
+      )}
+    </span>
+  );
+}
+
+function Header() {
+  const [open, setOpen] = useState(false);
 
   return (
-    <article className={`project-card accent-${project.accent}${project.flagship ? ' flagship' : ''}`}>
-      <div className="flagship-copy">
-        <div className="product-launch-meta">
-          <span>{project.launchRank}</span>
-          <strong>
-            <ChevronUp size={15} aria-hidden="true" /> {project.upvotes}
-          </strong>
-          <span>社区产品发布</span>
+    <header className="site-header">
+      <a className="brand-link" href="#top" aria-label="返回一支烟花 AI 首页" onClick={() => setOpen(false)}>
+        <Logo />
+      </a>
+      <button
+        className="menu-toggle"
+        type="button"
+        aria-label={open ? '关闭导航' : '打开导航'}
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
+      >
+        {open ? <X size={20} /> : <Menu size={20} />}
+      </button>
+      <nav className={`main-nav${open ? ' is-open' : ''}`} aria-label="主导航">
+        {navItems.map(([label, href]) => (
+          <a href={href} key={href} onClick={() => setOpen(false)}>
+            {label}
+          </a>
+        ))}
+      </nav>
+      <a className="github-link" href="https://github.com/yizhiyanhua-ai" target="_blank" rel="noreferrer">
+        <Github size={18} aria-hidden="true" />
+        <span>GitHub</span>
+        <ArrowUpRight size={14} aria-hidden="true" />
+      </a>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="hero" id="top">
+      <img
+        className="hero-image"
+        src={`${import.meta.env.BASE_URL}assets/fireworks-hero.png`}
+        alt="烟花形态的 AI 社区品牌视觉"
+      />
+      <div className="hero-shade" />
+      <div className="hero-grid" aria-hidden="true" />
+      <div className="hero-content">
+        <div className="hero-index">
+          <span>COMMUNITY / 2023 - NOW</span>
+          <span className="live-dot">PUBLIC BUILDING</span>
         </div>
-        <div className="project-topline">
-          <span>{project.productType}</span>
-          <span>{project.category}</span>
-        </div>
-        <div className="project-title-row">
-          <h3>{project.name}</h3>
-          <span className="project-language">{project.language}</span>
-        </div>
-        <p className="project-tagline">{project.tagline}</p>
-        <p className="project-outcome">{project.outcome}</p>
-        <div className="project-use-case">
-          <span>使用场景</span>
-          <strong>{project.useCase}</strong>
-        </div>
-        <div className="feature-chip-row">
-          {project.highlights.map((highlight) => (
-            <span key={highlight}>{highlight}</span>
-          ))}
-        </div>
-        <div className="project-metrics" aria-label={`${project.name} GitHub metrics`}>
-          <span>
-            <Star size={15} aria-hidden="true" /> {project.stars.toLocaleString()}
-          </span>
-          <span>
-            <GitFork size={15} aria-hidden="true" /> {project.forks.toLocaleString()}
-          </span>
-        </div>
-        <div className="project-actions">
-          {project.demo && (
-            <a className="launch-link" href={project.demo} target="_blank" rel="noreferrer">
-              体验 Demo <ExternalLink size={15} aria-hidden="true" />
-            </a>
-          )}
-          <a href={project.url} target="_blank" rel="noreferrer">
-            查看开源 <ExternalLink size={15} aria-hidden="true" />
+        <h1>一支烟花 AI</h1>
+        <p className="hero-statement">让硬核内容长出产品，让个人探索变成社区资产。</p>
+        <p className="hero-copy">
+          关注 Agent、AI 产品、模型基础设施与真实落地。我们把洞见写成文章，把方法做成工具，
+          再把可复用的结果交给开源社区。
+        </p>
+        <div className="hero-actions">
+          <a className="action action-primary" href="#products">
+            <Sparkles size={18} aria-hidden="true" />
+            探索 AI 产品
+            <ArrowDown size={16} aria-hidden="true" />
+          </a>
+          <a className="action action-ghost" href="#signals">
+            <Radio size={18} aria-hidden="true" />
+            进入内容现场
           </a>
         </div>
       </div>
-      <ProductPreview project={project} />
-    </article>
-  );
-}
-
-function ContentTrackCard({ track, index }) {
-  const TrackIcon = [Rocket, TerminalSquare, Lightbulb, Code2][index];
-  return (
-    <article className={`content-track tone-${track.accent}`}>
-      <TrackIcon size={28} aria-hidden="true" />
-      <h3>{track.title}</h3>
-      <p>{track.body}</p>
-    </article>
-  );
-}
-
-function XFeedPanel() {
-  const [feed, setFeed] = useState(xFeedFallback);
-  const posts = useMemo(() => {
-    const items = feed.posts?.length ? feed.posts : xFeedFallback.posts;
-    return [...items, ...items];
-  }, [feed]);
-
-  useEffect(() => {
-    let active = true;
-
-    fetch('/fireworks/assets/x-feed.json', { cache: 'no-store' })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`x-feed ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((payload) => {
-        if (active && Array.isArray(payload.posts) && payload.posts.length > 0) {
-          setFeed({
-            ...xFeedFallback,
-            ...payload,
-            account: {
-              ...xFeedFallback.account,
-              ...(payload.account ?? {}),
-            },
-          });
-        }
-      })
-      .catch(() => {
-        if (active) {
-          setFeed(xFeedFallback);
-        }
-      });
-
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  return (
-    <div className="x-feed-panel" aria-label="X 动态流">
-      <div className="x-feed-header">
-        <div>
-          <span>X / Live Notes</span>
-          <strong>@{feed.account.handle}</strong>
+      <div className="hero-console" aria-label="社区公开数据">
+        <div className="console-head">
+          <span>FIREWORKS SIGNAL ENGINE</span>
+          <i />
         </div>
-        <a href={feed.account.url} target="_blank" rel="noreferrer">
-          查看 X <ExternalLink size={14} aria-hidden="true" />
-        </a>
-      </div>
-      <div className="x-feed-window">
-        <div className="x-feed-track">
-          {posts.map((post, index) => (
-            <a className="x-post-card" href={post.url} target="_blank" rel="noreferrer" key={`${post.id}-${index}`}>
-              <div className="x-post-meta">
-                <span>{post.createdAt}</span>
-                <span>{post.metrics}</span>
-              </div>
-              <p>{post.text}</p>
-              <div className="x-post-tags">
-                {post.tags?.slice(0, 3).map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-            </a>
+        <div className="console-list">
+          <div>
+            <span>01 / PRODUCTS</span>
+            <strong>{projectStats.repos} 个公开仓库</strong>
+            <small>Ideas become reusable tools</small>
+          </div>
+          <div>
+            <span>02 / RESEARCH</span>
+            <strong>{officialAccount.originalPosts} 篇原创内容</strong>
+            <small>Long-form, engineering-first</small>
+          </div>
+          <div>
+            <span>03 / OPEN SOURCE</span>
+            <strong>{projectStats.stars} Stars</strong>
+            <small>Verified in public</small>
+          </div>
+        </div>
+        <div className="console-wave" aria-hidden="true">
+          {Array.from({ length: 28 }, (_, index) => (
+            <span key={index} style={{ '--h': `${18 + ((index * 17) % 58)}%` }} />
           ))}
         </div>
       </div>
-      <div className="x-feed-status">
-        <span>20 条公开 JSON 快照</span>
-        <span>X API 定时同步预留</span>
+      <a className="hero-scroll" href="#products" aria-label="向下浏览产品">
+        <span>SCROLL TO EXPLORE</span>
+        <ArrowDown size={15} aria-hidden="true" />
+      </a>
+    </section>
+  );
+}
+
+function LaunchTicker() {
+  const items = ['Agent Products', 'Technical Visual AI', 'Persistent Memory', 'Open Skills', 'Hardcore Research'];
+  return (
+    <div className="launch-ticker" aria-label="社区重点方向">
+      <div className="launch-ticker-track">
+        {[...items, ...items].map((item, index) => (
+          <span key={`${item}-${index}`}>
+            <i /> {item}
+          </span>
+        ))}
       </div>
     </div>
   );
 }
 
-function WechatArticlePanel() {
-  const [archive, setArchive] = useState({
-    updatedAt: '2026-07-09T00:00:00+08:00',
-    source: 'local fallback',
-    articles: wechatArticles,
-  });
-  const sourceArticles = archive.articles?.length ? archive.articles : wechatArticles;
-  const featuredArticle = sourceArticles[0];
-  const listArticles = sourceArticles.slice(1);
-  const articles = useMemo(() => [...listArticles, ...listArticles], [listArticles]);
-
-  useEffect(() => {
-    let active = true;
-
-    fetch('/fireworks/assets/wechat-articles.json', { cache: 'no-store' })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`wechat-articles ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((payload) => {
-        if (active && Array.isArray(payload.articles) && payload.articles.length > 0) {
-          setArchive({
-            ...payload,
-            articles: payload.articles,
-          });
-        }
-      })
-      .catch(() => {
-        if (active) {
-          setArchive({
-            updatedAt: '2026-07-09T00:00:00+08:00',
-            source: 'local fallback',
-            articles: wechatArticles,
-          });
-        }
-      });
-
-    return () => {
-      active = false;
-    };
-  }, []);
-
+function SectionIntro({ eyebrow, title, body, aside }) {
   return (
-    <section className="wechat-article-panel" aria-label="一支烟花 AI 公众号文章">
-      <div className="wechat-article-head">
-        <div>
-          <span>Official Archive</span>
-          <strong>公众号文章流</strong>
-        </div>
-        <small>{sourceArticles.length} 篇</small>
-        <BookOpen size={22} aria-hidden="true" />
+    <div className="section-intro" data-reveal>
+      <div>
+        <span className="eyebrow">{eyebrow}</span>
+        <h2>{title}</h2>
       </div>
-      {featuredArticle && (
-        <a className="wechat-article-feature" href={featuredArticle.url} target="_blank" rel="noreferrer">
-          <div>
-            <span>精选样本</span>
-            <strong>{featuredArticle.title}</strong>
-          </div>
-          <em>
-            阅读 <ExternalLink size={13} aria-hidden="true" />
-          </em>
-        </a>
-      )}
-      <div className="wechat-article-window">
-        <div className="wechat-article-track">
-          {articles.map((article, index) => (
-            <a
-              className="wechat-article-card"
-              href={article.url}
-              target="_blank"
-              rel="noreferrer"
-              key={`${article.id}-${index}`}
-            >
-              <div className="wechat-article-meta">
-                <span>{article.date}</span>
-                <span>{article.source}</span>
-              </div>
-              <h3>{article.title}</h3>
-              <p>{article.summary}</p>
-              <div className="wechat-article-foot">
-                <span>{article.category}</span>
-                <span>
-                  阅读 <ExternalLink size={13} aria-hidden="true" />
-                </span>
-              </div>
-            </a>
+      <div className="section-intro-copy">
+        <p>{body}</p>
+        {aside && <span className="section-note">{aside}</span>}
+      </div>
+    </div>
+  );
+}
+
+function GeneratedPreview({ project }) {
+  const rows = project.highlights.slice(0, 3);
+  return (
+    <div className={`generated-preview accent-${project.accent}`} aria-hidden="true">
+      <div className="generated-toolbar">
+        <span />
+        <span />
+        <span />
+        <strong>{project.productType}</strong>
+      </div>
+      <div className="generated-layout">
+        <div className="generated-side">
+          {rows.map((row, index) => (
+            <span key={row} className={index === 0 ? 'active' : ''}>
+              0{index + 1} {row}
+            </span>
           ))}
         </div>
+        <div className="generated-canvas">
+          <span className="node node-a">INPUT</span>
+          <span className="node node-b">AGENT</span>
+          <span className="node node-c">OUTPUT</span>
+          <i className="line line-a" />
+          <i className="line line-b" />
+          <div className="generated-result">
+            <small>BUILD RESULT</small>
+            <strong>{project.tagline}</strong>
+          </div>
+        </div>
       </div>
-      <div className="wechat-article-status">
-        <span>{archive.source?.includes('Official') ? '官方 API 快照' : '公开档案快照'}</span>
-        <span>{archive.updatedAt?.slice(0, 10)}</span>
+    </div>
+  );
+}
+
+function ProductVisual({ project }) {
+  if (!project.previewImage) return <GeneratedPreview project={project} />;
+
+  return (
+    <figure className="product-visual">
+      <img src={project.previewImage} alt={project.previewAlt || `${project.name} 产品截图`} />
+      <figcaption>
+        <span>{project.previewSource || 'README PRODUCT PREVIEW'}</span>
+        <a href={project.url} target="_blank" rel="noreferrer">
+          查看源项目 <ExternalLink size={13} aria-hidden="true" />
+        </a>
+      </figcaption>
+    </figure>
+  );
+}
+
+function ProductLab() {
+  const categories = useMemo(
+    () => ['全部', ...Array.from(new Set(featuredProjects.map((project) => project.category)))],
+    [],
+  );
+  const [category, setCategory] = useState('全部');
+  const filtered = category === '全部' ? featuredProjects : featuredProjects.filter((project) => project.category === category);
+  const [selectedName, setSelectedName] = useState(featuredProjects[0].name);
+  const selected = filtered.find((project) => project.name === selectedName) || filtered[0];
+
+  function selectCategory(nextCategory) {
+    setCategory(nextCategory);
+    const nextProjects = nextCategory === '全部'
+      ? featuredProjects
+      : featuredProjects.filter((project) => project.category === nextCategory);
+    setSelectedName(nextProjects[0].name);
+  }
+
+  return (
+    <section className="product-lab" id="products">
+      <div className="section-wrap">
+        <SectionIntro
+          eyebrow="01 / AI PRODUCT LAB"
+          title="社区的价值，要落到可以被使用的产品上。"
+          body="这里展示的每个项目都来自真实工作流：观察问题、形成方法、做成工具、公开验证。你看到的不只是仓库列表，而是一组持续进化的 AI 产品。"
+          aside={`${featuredProjects.length} PRODUCTS / OPEN SOURCE`}
+        />
+        <div className="product-filter" role="tablist" aria-label="按产品方向筛选">
+          {categories.map((item) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={category === item}
+              className={category === item ? 'active' : ''}
+              key={item}
+              onClick={() => selectCategory(item)}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+        <div className="product-stage" data-reveal>
+          <div className="product-stage-copy">
+            <div className="product-stage-meta">
+              <span>{selected.launchRank}</span>
+              <span>{selected.productType}</span>
+              <span>{selected.language}</span>
+            </div>
+            <h3>{selected.name}</h3>
+            <p className="product-tagline">{selected.tagline}</p>
+            <p className="product-outcome">{selected.outcome}</p>
+            <div className="product-usecase">
+              <small>适合用在</small>
+              <strong>{selected.useCase}</strong>
+            </div>
+            <ul className="product-highlights">
+              {selected.highlights.map((highlight) => (
+                <li key={highlight}>
+                  <Zap size={14} aria-hidden="true" /> {highlight}
+                </li>
+              ))}
+            </ul>
+            <div className="product-metrics">
+              <span><Star size={15} aria-hidden="true" /> {selected.stars.toLocaleString()} Stars</span>
+              <span><GitFork size={15} aria-hidden="true" /> {selected.forks.toLocaleString()} Forks</span>
+            </div>
+            <div className="product-actions">
+              {selected.demo && (
+                <a className="action action-primary" href={selected.demo} target="_blank" rel="noreferrer">
+                  体验产品 <ArrowUpRight size={15} aria-hidden="true" />
+                </a>
+              )}
+              <a className="action action-outline" href={selected.url} target="_blank" rel="noreferrer">
+                <Github size={17} aria-hidden="true" /> 查看源码
+              </a>
+            </div>
+          </div>
+          <ProductVisual project={selected} />
+        </div>
+        <div className="product-index" aria-label="AI 产品列表">
+          {filtered.map((project, index) => (
+            <button
+              type="button"
+              className={selected.name === project.name ? 'active' : ''}
+              onClick={() => setSelectedName(project.name)}
+              key={project.name}
+            >
+              <span className="product-index-number">{String(index + 1).padStart(2, '0')}</span>
+              <span className={`product-index-icon accent-${project.accent}`}>
+                {project.previewImage ? <img src={project.previewImage} alt="" /> : <Boxes size={22} />}
+              </span>
+              <span className="product-index-name">
+                <strong>{project.name}</strong>
+                <small>{project.tagline}</small>
+              </span>
+              <span className="product-index-stat">
+                <Star size={13} aria-hidden="true" /> {project.stars.toLocaleString()}
+              </span>
+              <ChevronRight size={18} aria-hidden="true" />
+            </button>
+          ))}
+        </div>
+        <a className="all-projects-link" href="https://github.com/orgs/yizhiyanhua-ai/repositories" target="_blank" rel="noreferrer">
+          浏览全部公开仓库 <ArrowRight size={17} aria-hidden="true" />
+        </a>
       </div>
     </section>
   );
 }
 
-function App() {
+function XSignal({ feed }) {
+  const posts = feed.posts?.length ? feed.posts.slice(0, 20) : xFeedFallback.posts;
+  const loop = [...posts, ...posts];
+
   return (
-    <>
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="返回首页">
-          <span className="brand-mark" aria-hidden="true">
-            <img src="/fireworks/assets/community-logo.png" alt="" />
-          </span>
-          <span>一支烟花 AI 社区</span>
+    <article className="signal-column signal-x">
+      <div className="signal-head">
+        <div>
+          <span>X / FIELD NOTES</span>
+          <strong>@{feed.account?.handle || 'teach_fireworks'}</strong>
+        </div>
+        <a href={feed.account?.url || xFeedFallback.account.url} target="_blank" rel="noreferrer" aria-label="在 X 查看">
+          <ArrowUpRight size={18} />
         </a>
-        <nav className="nav-links" aria-label="主导航">
-          {navItems.map(([label, href]) => (
-            <a key={href} href={href}>
-              {label}
+      </div>
+      <div className="signal-window">
+        <div className="signal-track x-track">
+          {loop.map((post, index) => (
+            <a className="x-signal-item" href={post.url} target="_blank" rel="noreferrer" key={`${post.id}-${index}`}>
+              <div>
+                <span>{post.createdAt}</span>
+                <small>{post.metrics}</small>
+              </div>
+              <p>{post.text}</p>
+              <footer>
+                {post.tags?.slice(0, 3).map((tag) => <span key={tag}>#{tag}</span>)}
+              </footer>
             </a>
           ))}
-        </nav>
-        <a
-          className="header-action"
-          href="https://github.com/yizhiyanhua-ai"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Github size={18} aria-hidden="true" />
-          GitHub
-        </a>
-      </header>
+        </div>
+      </div>
+      <div className="signal-foot">
+        <span><i /> LIVE SNAPSHOT</span>
+        <span>{posts.length} SIGNALS</span>
+      </div>
+    </article>
+  );
+}
 
-      <main id="top">
-        <section className="hero-section">
-          <div className="hero-copy">
-            <h1>一支烟花 AI 社区</h1>
-            <p className="hero-lede">
-              专注硬核 AI 内容，连接高质量洞见、开源项目与极客共创。把 AI 产品、Agent、
-              模型基础设施和真实落地案例拆成可以复用的方法、工具和作品。
-            </p>
-            <div className="hero-actions">
-              <a className="button primary" href="#official-account">
-                <MessageCircle size={18} aria-hidden="true" />
-                关注公众号
-              </a>
-              <a
-                className="button secondary"
-                href="#projects"
-              >
-                <Boxes size={18} aria-hidden="true" />
-                浏览开源项目
-              </a>
-            </div>
-            <div className="hero-principles" aria-label="社区关键词">
-              <span>硬核 AI 内容</span>
-              <span>Agent 观察</span>
-              <span>开源工具</span>
-              <span>社群共创</span>
-            </div>
-            <div className="stats-row">
-              <Stat value={officialAccount.originalPosts} label="原创内容" />
-              <Stat value={projectStats.repos} label="公开仓库" />
-              <Stat value={projectStats.stars} label="GitHub stars" />
-              <Stat value={communityIntro.founded.slice(0, 4)} label="社区起点" />
-            </div>
-          </div>
-          <div className="hero-visual" aria-label="烟花 AI 社区视觉">
-            <img src="/fireworks/assets/fireworks-hero.png" alt="" />
-            <div className="code-panel" aria-hidden="true">
-              <span># build together</span>
-              <span>def spark():</span>
-              <span>  ideas = collect()</span>
-              <span>  code = build(ideas)</span>
-              <span>  share(code)</span>
-              <span>  return impact()</span>
-            </div>
-          </div>
-        </section>
+function ArticleSignal({ archive }) {
+  const articles = archive.articles?.length ? archive.articles : wechatArticles;
+  const loop = [...articles, ...articles];
 
-        <section className="official-section" id="official-account">
-          <div className="official-shell">
-            <div className="official-copy">
-              <span className="section-kicker">Official Account</span>
-              <h2>公众号是社区的内容入口，也是长期研究的公开档案。</h2>
-              <p>
-                「{officialAccount.name}」围绕硬核 AI 内容、Agent 产品观察、模型基础设施、
-                开源工具和社群共创持续输出。官网把这些内容方向和开源项目连接起来，
-                让文章、代码、复盘和学习路径形成一个可继续生长的实验室。
-              </p>
-              <div className="official-stats" aria-label="公众号公开数据">
-                <Stat value={officialAccount.originalPosts} label="原创内容" />
-                <Stat value={officialAccount.videoChannel} label="视频号" />
-                <Stat value={communityIntro.founded.slice(0, 4)} label="社区起点" />
+  return (
+    <article className="signal-column signal-wechat">
+      <div className="signal-head signal-head-qr">
+        <div>
+          <span>WECHAT / DEEP RESEARCH</span>
+          <strong>一支烟花 AI</strong>
+        </div>
+        <div className="mini-qr">
+          <img src={officialAccount.qrImage} alt="一支烟花 AI 公众号二维码" />
+          <span>扫码关注</span>
+        </div>
+      </div>
+      <div className="signal-window">
+        <div className="signal-track article-track">
+          {loop.map((article, index) => (
+            <a className="article-signal-item" href={article.url} target="_blank" rel="noreferrer" key={`${article.id}-${index}`}>
+              <div className="article-date">
+                <span>{article.date?.slice(5, 10).replace('-', '.')}</span>
+                <small>{article.date?.slice(0, 4)}</small>
               </div>
-              <div className="official-proof">
-                <BookOpen size={22} aria-hidden="true" />
-                <span>{officialAccount.tagline}</span>
+              <div>
+                <span className="article-category">{article.category}</span>
+                <h3>{article.title}</h3>
+                <p>{article.summary}</p>
               </div>
-              <div className="content-track-grid inline" aria-label="公众号内容雷达">
-                {contentTracks.map((track, index) => (
-                  <ContentTrackCard key={track.title} track={track} index={index} />
-                ))}
-              </div>
-            </div>
-            <aside className="official-media" aria-label="公众号入口">
-              <XFeedPanel />
-              <WechatArticlePanel />
-              <div className="qr-card compact">
-                <img src={officialAccount.qrImage} alt="一支烟花 AI 公众号二维码" />
-                <div>
-                  <strong>扫码关注公众号</strong>
-                  <span>硬核 AI 内容、Agent 观察、开源项目和社群共创记录</span>
-                </div>
-              </div>
-            </aside>
-          </div>
-        </section>
-
-        <section className="community-section section-band" id="community">
-          <div className="community-shell">
-            <div className="community-copy">
-              <span className="section-kicker">Community Intro</span>
-              <h2>{communityIntro.headline}</h2>
-              <p>{communityIntro.body}</p>
-              <div className="intro-notes">
-                {communityIntro.notes.map((item) => (
-                  <div key={item.label}>
-                    <span>{item.label}</span>
-                    <strong>{item.value}</strong>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="belief-panel" aria-label="社区理念">
-              <div className="belief-panel-head">
-                <Compass size={28} aria-hidden="true" />
-                <span>公开摘要里的核心线索</span>
-              </div>
-              <p>
-                社区介绍公开摘要显示它从 2023 年底开始，核心方向围绕 AI 实践、产品运营、
-                社区定位、用户留存和差异化策略。本页只使用公开可读信息，并把不可公开部分留在来源链接里。
-              </p>
-              <a
-                href="https://note.mowen.cn/detail/mQcaY_6GxndRz6_g8m5Uw?code=jc1ShFKLB7tkan9v"
-                target="_blank"
-                rel="noreferrer"
-              >
-                查看公开社区介绍 <ExternalLink size={16} aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-          <div className="belief-grid">
-            {communityBeliefs.map((belief, index) => (
-              <article key={belief.title}>
-                <span className="belief-icon">
-                  {index === 0 && <Lightbulb size={28} aria-hidden="true" />}
-                  {index === 1 && <Layers3 size={28} aria-hidden="true" />}
-                  {index === 2 && <Network size={28} aria-hidden="true" />}
-                </span>
-                <h3>{belief.title}</h3>
-                <p>{belief.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="position-section">
-          <div className="section-heading left">
-            <span className="section-kicker">Community Position</span>
-            <h2>它连接四类长期价值。</h2>
-          </div>
-          <div className="position-grid">
-            <article>
-              <Code2 size={30} aria-hidden="true" />
-              <h3>开源驱动</h3>
-              <p>用代码、文档和演示站点沉淀真实经验，项目可被复制、验证和继续改造。</p>
-            </article>
-            <article>
-              <BookOpen size={30} aria-hidden="true" />
-              <h3>学习共创</h3>
-              <p>把论文、工具、案例和失败复盘变成结构化材料，降低下一位实践者的成本。</p>
-            </article>
-            <article>
-              <TerminalSquare size={30} aria-hidden="true" />
-              <h3>工程落地</h3>
-              <p>关注工作流、Agent、Skill、内容工具链和验证闭环，强调能跑起来的结果。</p>
-            </article>
-            <article>
-              <Globe2 size={30} aria-hidden="true" />
-              <h3>开放包容</h3>
-              <p>欢迎不同背景的开发者、研究者和创作者，用公开成果连接更多协作者。</p>
-            </article>
-          </div>
-        </section>
-
-        <section className="projects-section section-band" id="projects">
-          <div className="section-heading">
-            <span className="section-kicker">AI Product Lab</span>
-            <h2>把社区里的 AI 实验，打磨成可体验的产品。</h2>
-            <p>
-              用 Product Hunt 式的方式看这些开源项目：每个产品都对应一个真实 AI 工作流，有明确使用场景、产品特点和可复用入口。
-              旗舰项目优先展示体验界面，其他工具保持清晰的产品定位。
-            </p>
-          </div>
-          <div className="product-lab-intro" aria-label="AI 产品实验室方法">
-            <span>观察前沿问题</span>
-            <span>拆解真实工作流</span>
-            <span>产品化为开源工具</span>
-            <span>社区继续复用验证</span>
-          </div>
-          <div className="project-grid">
-            {featuredProjects.filter((project) => project.flagship).map((project) => (
-              <ProjectCard key={project.name} project={project} />
-            ))}
-          </div>
-          <div className="product-portfolio-grid">
-            {featuredProjects.filter((project) => !project.flagship).map((project) => (
-              <ProjectCard key={project.name} project={project} />
-            ))}
-          </div>
-          <div className="section-footnote">
-            <a href="https://github.com/orgs/yizhiyanhua-ai/repositories" target="_blank" rel="noreferrer">
-              查看全部公开仓库 <ExternalLink size={16} aria-hidden="true" />
+              <ArrowUpRight size={17} aria-hidden="true" />
             </a>
-          </div>
-        </section>
+          ))}
+        </div>
+      </div>
+      <div className="signal-foot">
+        <span><Newspaper size={13} /> PUBLIC ARCHIVE</span>
+        <span>{articles.length} ARTICLES</span>
+      </div>
+    </article>
+  );
+}
 
-        <section className="rhythm-section section-band" id="rhythm">
-          <div className="section-heading">
-            <span className="section-kicker">Learning Rhythm</span>
-            <h2>学习与研究节奏</h2>
-            <p>持续学习、共创分享，让长任务、工具链和开源项目形成飞轮。</p>
+function SignalSection() {
+  const feed = useRemoteJson('assets/x-feed.json', xFeedFallback);
+  const archive = useRemoteJson('assets/wechat-articles.json', {
+    updatedAt: '2026-07-09T00:00:00+08:00',
+    source: 'local fallback',
+    articles: wechatArticles,
+  });
+
+  return (
+    <section className="signals" id="signals">
+      <div className="section-wrap">
+        <SectionIntro
+          eyebrow="02 / LIVE INTELLIGENCE"
+          title="产品在仓库里生长，判断在内容里持续更新。"
+          body="短观察进入 X，长研究沉淀到公众号。两条公开内容流共同记录我们如何理解 Agent、AI 产品与模型基础设施。"
+          aside="PUBLIC FEEDS / CONTINUOUSLY UPDATED"
+        />
+        <div className="signal-board" data-reveal>
+          <XSignal feed={feed} />
+          <ArticleSignal archive={archive} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CommunitySection() {
+  return (
+    <section className="community" id="community">
+      <div className="community-lead section-wrap" data-reveal>
+        <div className="community-label">
+          <span>03 / COMMUNITY MANIFESTO</span>
+          <Logo compact />
+        </div>
+        <blockquote>
+          “让 AI 学习从信息消费走向作品生产，让个人经验变成别人可以继续使用的公共资产。”
+        </blockquote>
+        <div className="community-story">
+          <h2>{communityIntro.headline}</h2>
+          <p>{communityIntro.body}</p>
+        </div>
+      </div>
+      <div className="beliefs section-wrap">
+        {communityBeliefs.map((belief, index) => {
+          const Icon = [Sparkles, Layers3, Network][index];
+          return (
+            <article key={belief.title} data-reveal>
+              <span>0{index + 1}</span>
+              <Icon size={25} aria-hidden="true" />
+              <h3>{belief.title}</h3>
+              <p>{belief.body}</p>
+            </article>
+          );
+        })}
+      </div>
+      <div className="community-facts section-wrap" data-reveal>
+        {communityIntro.notes.map((note) => (
+          <div key={note.label}>
+            <span>{note.label}</span>
+            <strong>{note.value}</strong>
           </div>
-          <ol className="rhythm-line">
-            {rhythm.map((item, index) => (
-              <li key={item.title}>
-                <span className="rhythm-icon">
-                  {index === 0 && <CalendarDays size={26} />}
-                  {index === 1 && <BookOpen size={26} />}
-                  {index === 2 && <Code2 size={26} />}
-                  {index === 3 && <MessageCircle size={26} />}
-                  {index === 4 && <Rocket size={26} />}
-                </span>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function MethodsSection() {
+  return (
+    <section className="methods" id="principles">
+      <div className="section-wrap">
+        <SectionIntro
+          eyebrow="04 / HOW WE BUILD"
+          title="一套能被验证的社区工作方式。"
+          body="我们用内容识别问题，用项目验证判断，用公开成果连接协作者。理念必须进入交付过程，才会产生长期价值。"
+          aside="CONTENT → PRODUCT → COMMUNITY"
+        />
+        <div className="method-flow" data-reveal>
+          {rhythm.map((item, index) => {
+            const Icon = [CalendarDays, BookOpen, Code2, MessageCircle, Rocket][index];
+            return (
+              <article key={item.title}>
+                <div>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <Icon size={21} aria-hidden="true" />
+                </div>
                 <h3>{item.title}</h3>
                 <p>{item.detail}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="principles-section" id="principles">
-          <div className="section-heading left">
-            <span className="section-kicker">Operating Principles</span>
-            <h2>社区理念不是口号，是每个项目的交付标准。</h2>
-            <p>官网只呈现公开且可验证的信息。私密群聊、个人联系方式、未授权材料不进入页面。</p>
-          </div>
-          <div className="principles-grid">
-            {operatingPrinciples.map((principle) => {
-              const Icon = icons[principle.title];
-              return (
-                <article className={`principle tone-${principle.tone}`} key={principle.title}>
-                  <Icon size={30} aria-hidden="true" />
-                  <h3>{principle.title}</h3>
-                  <p>{principle.body}</p>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="sources-section section-band" id="sources">
-          <div className="section-heading">
-            <span className="section-kicker">Resource Navigation</span>
-            <h2>资源导航与公开性说明</h2>
-            <p>每条来源都标注当前可验证状态，避免把登录页、私域内容或摘要片段误写成事实正文。</p>
-          </div>
-          <div className="source-list">
-            {sourceNotes.map((source) => (
-              <a
-                className="source-row"
-                href={source.url}
-                target={source.url.startsWith('#') ? undefined : '_blank'}
-                rel={source.url.startsWith('#') ? undefined : 'noreferrer'}
-                key={source.url}
-              >
-                <div>
-                  <span>{source.type}</span>
-                  <h3>{source.title}</h3>
-                  <p>{source.summary}</p>
-                </div>
-                <strong>{source.status}</strong>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="join-section">
-          <div className="join-art" aria-hidden="true" />
-          <div className="join-content">
-            <h2>一起点燃更多 AI 的火花</h2>
-            <p>
-              从一个问题、一段脚本、一次复盘开始，把个人探索变成社区可以继续生长的项目、方法和理念。
-            </p>
-            <div className="hero-actions">
-              <a
-                className="button primary"
-                href="https://github.com/yizhiyanhua-ai"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Github size={18} aria-hidden="true" />
-                浏览 GitHub 组织
-              </a>
-              <a
-                className="button secondary"
-                href="https://hqexj12b0g.feishu.cn/docx/TyymdoAdRodWGJxCi6FcJvEUn2b"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <ExternalLink size={18} aria-hidden="true" />
-                社群介绍文档
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer>
-        <div className="footer-brand">
-          <span className="brand-mark" aria-hidden="true">
-            <img src="/fireworks/assets/community-logo.png" alt="" />
-          </span>
-          <strong>一支烟花 AI 社区</strong>
+              </article>
+            );
+          })}
         </div>
-        <p>开源、共创、长期主义。本站内容基于公开资料和公开仓库构建。</p>
-        <div className="footer-links">
-          <a href="https://github.com/yizhiyanhua-ai" target="_blank" rel="noreferrer">
-            GitHub
+        <div className="principle-list">
+          {operatingPrinciples.map((principle) => {
+            const Icon = principleIcons[principle.title];
+            return (
+              <article key={principle.title} data-reveal>
+                <Icon size={22} aria-hidden="true" />
+                <h3>{principle.title}</h3>
+                <p>{principle.body}</p>
+                <span className={`principle-line tone-${principle.tone}`} />
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContentRadar() {
+  return (
+    <section className="radar">
+      <div className="section-wrap">
+        <div className="radar-head" data-reveal>
+          <span>CONTENT RADAR</span>
+          <h2>我们持续追踪的四条线索</h2>
+          <p>{officialAccount.tagline}</p>
+        </div>
+        <div className="radar-grid">
+          {contentTracks.map((track, index) => {
+            const Icon = trackIcons[index];
+            return (
+              <article className={`tone-${track.accent}`} key={track.title} data-reveal>
+                <span>0{index + 1}</span>
+                <Icon size={25} aria-hidden="true" />
+                <h3>{track.title}</h3>
+                <p>{track.body}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OpenSection() {
+  return (
+    <section className="open-layer">
+      <div className="section-wrap">
+        <SectionIntro
+          eyebrow="05 / OPEN LAYER"
+          title="公开来源，公开验证，公开继续。"
+          body="社区官网只使用公开可验证的信息。私密群聊、个人联系方式、未授权材料和凭据不会进入页面。"
+          aside="PRIVACY FIRST / SOURCE VISIBLE"
+        />
+        <div className="source-grid">
+          {sourceNotes.map((source) => (
+            <a
+              href={source.url}
+              target={source.url.startsWith('#') ? undefined : '_blank'}
+              rel={source.url.startsWith('#') ? undefined : 'noreferrer'}
+              key={`${source.title}-${source.url}`}
+            >
+              <div>
+                <span>{source.type}</span>
+                <strong>{source.title}</strong>
+                <p>{source.summary}</p>
+              </div>
+              <small>{source.status}</small>
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function JoinSection() {
+  return (
+    <section className="join">
+      <img src={`${import.meta.env.BASE_URL}assets/fireworks-hero.png`} alt="" />
+      <div className="join-overlay" />
+      <div className="join-content section-wrap" data-reveal>
+        <span>BUILD IN PUBLIC</span>
+        <h2>把下一束 AI 火花，做成真正能被使用的东西。</h2>
+        <p>从一个问题、一段脚本或一次复盘开始。公开它，验证它，让更多人接着往前走。</p>
+        <div className="hero-actions">
+          <a className="action action-primary" href="https://github.com/yizhiyanhua-ai" target="_blank" rel="noreferrer">
+            <Github size={18} aria-hidden="true" /> 加入开源共创
           </a>
-          <a href="#projects">Projects</a>
-          <a href="#sources">Sources</a>
+          <a className="action action-ghost" href="https://hqexj12b0g.feishu.cn/docx/TyymdoAdRodWGJxCi6FcJvEUn2b" target="_blank" rel="noreferrer">
+            了解社区 <ExternalLink size={16} aria-hidden="true" />
+          </a>
         </div>
-      </footer>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <Logo />
+      <p>硬核 AI 内容 · 开源产品 · 极客共创</p>
+      <div>
+        <a href="https://github.com/yizhiyanhua-ai" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://x.com/teach_fireworks" target="_blank" rel="noreferrer">X / @teach_fireworks</a>
+        <a href="#top">回到顶部</a>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  useReveal();
+
+  return (
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <LaunchTicker />
+        <ProductLab />
+        <SignalSection />
+        <CommunitySection />
+        <MethodsSection />
+        <ContentRadar />
+        <OpenSection />
+        <JoinSection />
+      </main>
+      <Footer />
     </>
   );
 }
