@@ -15,7 +15,7 @@ import { formatSnapshotDate } from '../utils/content';
 import { SectionIntro } from './SectionIntro';
 
 const PROJECT_METRICS_FALLBACK = {
-  updatedAt: '2026-07-10T00:00:00+08:00',
+  updatedAt: '2026-07-15T00:00:00+08:00',
   projects: Object.fromEntries(
     featuredProjects.map((project) => [project.name, { stars: project.stars, forks: project.forks }]),
   ),

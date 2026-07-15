@@ -38,6 +38,16 @@ test('every featured project has traceable visual evidence', () => {
   }
 });
 
+test('fireworks-tech-graph product card reflects the v1.1.0 engineering release', () => {
+  const project = featuredProjects.find((item) => item.name === 'fireworks-tech-graph');
+  assert.ok(project);
+  assert.equal(project.previewImage, '/fireworks/assets/product-tech-graph-cloud-fabric.png');
+  assert.equal(project.previewSource, 'v1.1.0 sample: Style 10 Cloud Fabric');
+  assert.ok(project.highlights.includes('12 种差异化视觉风格'));
+  assert.ok(project.highlights.includes('线束与文字出框自动校验'));
+  assert.match(project.description, /离线交互 HTML/);
+});
+
 test('GitHub metrics snapshot covers the complete product matrix', () => {
   assert.equal(Object.keys(projectSnapshot.projects).length, featuredProjects.length);
 
