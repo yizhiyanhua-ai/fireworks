@@ -26,7 +26,7 @@ test('every featured project has traceable visual evidence', () => {
 
   for (const project of featuredProjects) {
     assert.match(project.url, /^https:\/\/github\.com\/yizhiyanhua-ai\//);
-    assert.match(project.previewImage, /^\/fireworks\/assets\/product-.*\.(png|webp|svg)$/);
+    assert.match(project.previewImage, /^\/fireworks\/assets\/product-.*\.(gif|png|webp|svg)$/);
     assert.equal(
       existsSync(new URL(`../public${project.previewImage.replace('/fireworks', '')}`, import.meta.url)),
       true,
@@ -38,14 +38,20 @@ test('every featured project has traceable visual evidence', () => {
   }
 });
 
-test('fireworks-tech-graph product card reflects the v1.1.0 engineering release', () => {
+test('fireworks-tech-graph product card reflects the v1.2.0 semantic motion release', () => {
   const project = featuredProjects.find((item) => item.name === 'fireworks-tech-graph');
   assert.ok(project);
-  assert.equal(project.previewImage, '/fireworks/assets/product-tech-graph-cloud-fabric.png');
-  assert.equal(project.previewSource, 'v1.1.0 sample: Style 10 Cloud Fabric');
-  assert.ok(project.highlights.includes('12 种差异化视觉风格'));
-  assert.ok(project.highlights.includes('线束与文字出框自动校验'));
-  assert.match(project.description, /离线交互 HTML/);
+  assert.equal(project.previewImage, '/fireworks/assets/product-tech-graph-motion-showcase.gif');
+  assert.equal(project.previewStaticImage, '/fireworks/assets/product-tech-graph-cloud-fabric.png');
+  assert.equal(
+    existsSync(new URL('../public/assets/product-tech-graph-cloud-fabric.png', import.meta.url)),
+    true,
+  );
+  assert.equal(project.previewSource, 'v1.2.0: 12 styles / draw-on / settled data flow');
+  assert.ok(project.highlights.includes('12 种风格共享语义动效契约'));
+  assert.ok(project.highlights.includes('线条渐进出现，最终持续数据流'));
+  assert.match(project.description, /语义 SVG→GIF/);
+  assert.match(project.description, /延长两秒/);
 });
 
 test('GitHub metrics snapshot covers the complete product matrix', () => {

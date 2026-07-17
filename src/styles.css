@@ -729,6 +729,15 @@ a:focus-visible {
   background: #05060a;
 }
 
+.product-visual picture {
+  display: block;
+  min-height: 0;
+}
+
+.product-visual picture img {
+  display: block;
+}
+
 .product-visual.preview-cover img {
   object-fit: cover;
 }

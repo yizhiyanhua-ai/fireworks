@@ -24,12 +24,17 @@ const PROJECT_METRICS_FALLBACK = {
 function ProductVisual({ project }) {
   return (
     <figure className={`product-visual preview-${project.previewFit || 'contain'}`}>
-      <img
-        src={project.previewImage}
-        alt={project.previewAlt || `${project.name} 项目预览`}
-        loading="lazy"
-        decoding="async"
-      />
+      <picture>
+        {project.previewStaticImage ? (
+          <source media="(prefers-reduced-motion: reduce)" srcSet={project.previewStaticImage} />
+        ) : null}
+        <img
+          src={project.previewImage}
+          alt={project.previewAlt || `${project.name} 项目预览`}
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
       <figcaption>
         <span>{project.previewSource}</span>
         <a href={project.url} target="_blank" rel="noreferrer">
