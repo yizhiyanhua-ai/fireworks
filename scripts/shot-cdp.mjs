@@ -85,7 +85,7 @@ if (scrollYArg !== undefined) {
   await send('Runtime.evaluate', {
     expression: `window.scrollTo({ top: ${Number(scrollYArg)}, behavior: 'instant' })`,
   }, sessionId);
-  await sleep(1400);
+  await sleep(3000);
 }
 
 const shot = await send('Page.captureScreenshot', { format: 'png' }, sessionId);

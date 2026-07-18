@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { featuredProjects } from '../src/communityData.js';
+import { communityAccess, communityGroups, featuredProjects } from '../src/communityData.js';
 import { formatSnapshotDate, isDirectWechatArticle, isDirectXPost } from '../src/utils/content.js';
 
 const xFeed = JSON.parse(readFileSync(new URL('../public/assets/x-feed.json', import.meta.url), 'utf8'));
@@ -70,4 +70,42 @@ test('public feeds keep enough content for the scrolling surfaces', () => {
   assert.ok(wechatArchive.articles.length >= 20);
   assert.ok(xFeed.posts.every((post) => post.id && post.text && post.url));
   assert.ok(wechatArchive.articles.every((article) => article.id && article.title && article.url && article.source));
+});
+
+test('community groups expose only public categories with traceable notes', () => {
+  assert.equal(communityGroups.length, 3);
+  const total = communityGroups.reduce((sum, category) => sum + category.groups.length, 0);
+  assert.equal(total, 17);
+
+  for (const category of communityGroups) {
+    assert.ok(category.category.length >= 2);
+    assert.ok(category.code.length >= 3);
+    assert.ok(category.summary.length > 10);
+    for (const group of category.groups) {
+      assert.ok(group.name.length >= 2);
+      assert.ok(group.note.length >= 4);
+    }
+  }
+
+  assert.match(communityAccess.docUrl, /^https:\/\/hqexj12b0g\.feishu\.cn\/docx\//);
+  assert.ok(communityAccess.joinNote.length > 20);
+});
+
+test('community data never leaks personal contacts or paid-channel details', () => {
+  const source = readFileSync(new URL('../src/communityData.js', import.meta.url), 'utf8');
+  const forbidden = [
+    'yilusun33',
+    'LeanInWind',
+    'hitpg_',
+    'dreamerUncle',
+    'vibebuilder',
+    'z4656207',
+    '365/年',
+    '￥365',
+    '微信号',
+    '二维码微信',
+  ];
+  for (const token of forbidden) {
+    assert.equal(source.includes(token), false, `forbidden token leaked: ${token}`);
+  }
 });

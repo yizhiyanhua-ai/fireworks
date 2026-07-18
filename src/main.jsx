@@ -34,7 +34,8 @@ import {
 import { ProductLab } from './components/ProductLab';
 import { SectionIntro } from './components/SectionIntro';
 import { SignalSection } from './components/SignalSection';
-import { HeroScene } from './components/HeroScene';
+import { FireworksCanvas } from './components/FireworksCanvas';
+import { CommunityGroups } from './components/CommunityGroups';
 import './styles.css';
 
 const navItems = [
@@ -130,7 +131,7 @@ function Hero() {
   return (
     <section className="hero" id="top">
       <div className="hero-nebula" aria-hidden="true" />
-      <HeroScene
+      <FireworksCanvas
         fallbackImage={`${import.meta.env.BASE_URL}assets/fireworks-hero.png`}
         fallbackAlt="烟花形态的 AI 社区品牌视觉"
       />
@@ -364,18 +365,23 @@ function OpenSection() {
 function JoinSection() {
   return (
     <section className="join">
-      <img src={`${import.meta.env.BASE_URL}assets/fireworks-hero.png`} alt="" />
+      <FireworksCanvas
+        className="join-scene"
+        fallbackImage={`${import.meta.env.BASE_URL}assets/fireworks-hero.png`}
+        sceneOptions={{ cadence: [1.0, 2.2], finaleChance: 0.14, burstScale: 1, openingBurst: false }}
+        interactive={false}
+      />
       <div className="join-overlay" />
       <div className="join-content section-wrap" data-reveal>
         <span>BUILD IN PUBLIC</span>
         <h2>把下一束 AI 火花，做成真正能被使用的东西。</h2>
         <p>从一个问题、一段脚本或一次复盘开始。公开它，验证它，让更多人接着往前走。</p>
         <div className="hero-actions">
-          <a className="action action-primary" href="https://github.com/yizhiyanhua-ai" target="_blank" rel="noreferrer">
-            <Github size={18} aria-hidden="true" /> 加入开源共创
-          </a>
-          <a className="action action-ghost" href="https://hqexj12b0g.feishu.cn/docx/TyymdoAdRodWGJxCi6FcJvEUn2b" target="_blank" rel="noreferrer">
+          <a className="action action-primary" href="https://hqexj12b0g.feishu.cn/docx/TyymdoAdRodWGJxCi6FcJvEUn2b" target="_blank" rel="noreferrer">
             了解社区 <ExternalLink size={16} aria-hidden="true" />
+          </a>
+          <a className="action action-ghost" href="https://github.com/yizhiyanhua-ai" target="_blank" rel="noreferrer">
+            <Github size={18} aria-hidden="true" /> 加入开源共创
           </a>
         </div>
       </div>
@@ -412,6 +418,7 @@ function App() {
         <MethodsSection />
         <ContentRadar />
         <OpenSection />
+        <CommunityGroups />
         <JoinSection />
       </main>
       <Footer />

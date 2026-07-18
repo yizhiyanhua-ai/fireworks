@@ -18,10 +18,10 @@ export const sourceNotes = [
   {
     title: '社区社群介绍',
     type: '飞书文档',
-    status: '当前返回登录页，未直接引用正文',
+    status: '社群分类已按公开信息整理展示',
     url: 'https://hqexj12b0g.feishu.cn/docx/TyymdoAdRodWGJxCi6FcJvEUn2b',
     summary:
-      '作为加入社区和内部介绍入口保留链接；公开页面不写入不可验证正文。',
+      '加入社区与社群介绍的入口；页面展示的社群分类整理自该对外公开文档，不含联系方式与二维码。',
   },
   {
     title: '公众号：一支烟花 AI',
@@ -479,3 +479,56 @@ export const rhythm = [
     detail: '把可公开项目集中到 GitHub Pages 与开源仓库，方便更多人复用。',
   },
 ];
+
+// 社群分类整理自社区对外公开的《一支烟花AI社区介绍 & 社群列表》文档。
+// 只展示公开分类与定位，不展示群聊内容、成员信息、运营联系方式与二维码。
+export const communityGroups = [
+  {
+    category: '技术研讨群',
+    code: 'TECH TRACKS',
+    accent: 'cyan',
+    summary: '按技术方向分群的深度讨论场，AI 从业者密度最高。',
+    groups: [
+      { name: '通用智能体', note: 'AI Agent 产品与技术，从业者最多' },
+      { name: 'AI Coding', note: '聚焦 AI 开发者' },
+      { name: '上下文工程', note: '上下文工程技术方向' },
+      { name: '多模态', note: '多模态方向，不定期举办活动' },
+      { name: 'AI 学术群', note: 'AI 论文与学术讨论' },
+      { name: 'AI prompt', note: '提示词领域，专业提示词专家入驻' },
+      { name: '虚拟人', note: 'AI 虚拟人方向' },
+      { name: 'AI 产品', note: '泛 AI 产品资讯' },
+    ],
+  },
+  {
+    category: '产品联合运营群',
+    code: 'PRODUCT LABS',
+    accent: 'magenta',
+    summary: '与 AI 产品方联合运营的社群，多个群有官方人员入驻。',
+    groups: [
+      { name: 'manus', note: 'manus 产品方向' },
+      { name: 'flowith', note: '官方人员入驻联合运营' },
+      { name: 'lovart', note: '官方人员入驻联合运营' },
+      { name: '通义千问', note: '官方人员入驻联合运营' },
+      { name: '通义万相', note: '官方人员入驻联合运营' },
+      { name: 'z.ai', note: '智谱海外联合运营' },
+    ],
+  },
+  {
+    category: '城市共创群',
+    code: 'CITY HUBS',
+    accent: 'gold',
+    summary: '线下城市的共创与活动网络，连接本地 AI 实践者。',
+    groups: [
+      { name: '上海群', note: '与 WaytoAGI 社区联合运营' },
+      { name: '北京群', note: '与大聪明 agibar 联合运营' },
+      { name: '广州群', note: '与本地机构共创，筛选优质伙伴' },
+    ],
+  },
+];
+
+export const communityAccess = {
+  docUrl: 'https://hqexj12b0g.feishu.cn/docx/TyymdoAdRodWGJxCi6FcJvEUn2b',
+  joinNote: '免费群需要自我介绍并通过资质审查，不必也不可以所有群都加；VIP 付费群通过知识星球加入。完整社群名单与加入方式见公开的社群介绍文档。',
+  knowledgeBase: '社区知识库：20 大类、500+ 篇干货分享，含每期烟花夜话回放。',
+  neutrality: '社区保持中立，不进行商业性站台；如有商业合作，会进行公示。',
+};

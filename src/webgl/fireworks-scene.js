@@ -123,6 +123,11 @@ export function createFireworksScene(canvas, options = {}) {
   if (!gl) throw new Error('WebGL2 unavailable');
 
   const reducedMotion = options.reducedMotion === true;
+  // 氛围模式参数：Hero 默认热闹，页尾等场景可调慢调柔
+  const cadence = options.cadence || [0.55, 1.2];
+  const finaleChance = options.finaleChance ?? 0.26;
+  const burstScale = options.burstScale ?? 1;
+  const openingBurst = options.openingBurst !== false;
 
   // ---------- GPU resources ----------
   const program = createProgram(gl, VERTEX_SHADER, FRAGMENT_SHADER);
@@ -359,12 +364,12 @@ export function createFireworksScene(canvas, options = {}) {
 
     if (!reducedMotion && elapsed >= nextAutoLaunch) {
       launch();
-      if (Math.random() < 0.26) {
+      if (Math.random() < finaleChance) {
         // 小高潮：连发
         setTimeout(() => launch(), 180);
         setTimeout(() => launch(), 390);
       }
-      nextAutoLaunch = elapsed + rand(0.55, 1.2);
+      nextAutoLaunch = elapsed + rand(cadence[0], cadence[1]);
     }
 
     for (let i = 0; i < MAX_PARTICLES; i += 1) {
@@ -379,7 +384,7 @@ export function createFireworksScene(canvas, options = {}) {
       if (age >= life) {
         if (sim[s + SIM_KIND] === KIND_ROCKET) {
           const palette = PALETTES[sim[s + SIM_PAL] % PALETTES.length];
-          explode(particleData[o], particleData[o + 1], particleData[o + 2], palette);
+          explode(particleData[o], particleData[o + 1], particleData[o + 2], palette, burstScale);
         }
         kill(i);
         continue;
@@ -485,9 +490,14 @@ export function createFireworksScene(canvas, options = {}) {
         gl.bindBuffer(gl.ARRAY_BUFFER, particles.buffer);
         gl.bufferData(gl.ARRAY_BUFFER, particleData, gl.DYNAMIC_DRAW);
       }
-      if (elapsed === 0 && !reducedMotion) {
-        // 首屏即有一束在空中，避免冷启动空场
-        explode(rand(-0.45, 0.45), rand(0.3, 0.68), rand(-1.5, -0.2), PALETTES[paletteIndex], 1.15);
+      if (!reducedMotion) {
+        if (elapsed === 0 && openingBurst) {
+          // 首屏即有一束在空中，避免冷启动空场
+          explode(rand(-0.45, 0.45), rand(0.3, 0.68), rand(-1.5, -0.2), PALETTES[paletteIndex], 1.15);
+        } else if (elapsed > 0) {
+          // 重新进入视口时用一束烟花迎接（离屏期间模拟已暂停）
+          explode(rand(-0.5, 0.5), rand(0.25, 0.6), rand(-1.6, -0.4), PALETTES[paletteIndex], 0.8);
+        }
       }
       rafId = window.requestAnimationFrame(frame);
     },
