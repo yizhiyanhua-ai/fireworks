@@ -59,3 +59,17 @@ npm run sync:github-projects
 
 Set `GITHUB_TOKEN` in CI to avoid the unauthenticated API rate limit. Every generated
 snapshot includes `updatedAt`, and the site labels it as a dated public snapshot.
+
+## Design Review Screenshots (local dev)
+
+Real-time headless-Chrome captures for visual verification (macOS Chrome required,
+dev server or preview server running):
+
+```bash
+node scripts/shot-cdp.mjs "http://localhost:4173/fireworks/" 8000 /tmp/hero.png 1440 900        # hero at 8s
+node scripts/shot-cdp.mjs "http://localhost:4173/fireworks/" 2500 /tmp/sec.png 1440 900 2300    # scrolled section
+node scripts/shot-cdp.mjs "http://localhost:4173/fireworks/" 2500 /tmp/reduced.png 1440 900 0 reduced  # prefers-reduced-motion
+node scripts/shot-fullpage.mjs "http://localhost:4173/fireworks/" /tmp/full.png 1440            # full page
+```
+
+Both scripts also print WebGL canvas status, particle stats, and page console errors.

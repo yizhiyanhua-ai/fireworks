@@ -34,6 +34,7 @@ import {
 import { ProductLab } from './components/ProductLab';
 import { SectionIntro } from './components/SectionIntro';
 import { SignalSection } from './components/SignalSection';
+import { HeroScene } from './components/HeroScene';
 import './styles.css';
 
 const navItems = [
@@ -128,10 +129,10 @@ function Header() {
 function Hero() {
   return (
     <section className="hero" id="top">
-      <img
-        className="hero-image"
-        src={`${import.meta.env.BASE_URL}assets/fireworks-hero.png`}
-        alt="烟花形态的 AI 社区品牌视觉"
+      <div className="hero-nebula" aria-hidden="true" />
+      <HeroScene
+        fallbackImage={`${import.meta.env.BASE_URL}assets/fireworks-hero.png`}
+        fallbackAlt="烟花形态的 AI 社区品牌视觉"
       />
       <div className="hero-shade" />
       <div className="hero-grid" aria-hidden="true" />
@@ -140,7 +141,9 @@ function Hero() {
           <span>COMMUNITY / 2023 - NOW</span>
           <span className="live-dot">PUBLIC BUILDING</span>
         </div>
-        <h1>一支烟花 AI</h1>
+        <h1>
+          一支烟花 <span className="hero-title-ai">AI</span>
+        </h1>
         <p className="hero-statement">让硬核内容长出产品，让个人探索变成社区资产。</p>
         <p className="hero-copy">
           关注 Agent、AI 产品、模型基础设施与真实落地。我们把洞见写成文章，把方法做成工具，
@@ -157,6 +160,10 @@ function Hero() {
             进入内容现场
           </a>
         </div>
+        <p className="hero-hint">
+          <Sparkles size={13} aria-hidden="true" />
+          点击夜空，亲手放一束烟花
+        </p>
       </div>
       <div className="hero-console" aria-label="社区公开数据">
         <div className="console-head">
