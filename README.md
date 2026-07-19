@@ -34,4 +34,8 @@ npm run build
 
 ## 发布
 
-主分支保存源码；发布时运行 `npm run build`，将 `dist` 产物推送到 `gh-pages` 分支，并将 GitHub Pages source 配置为 `gh-pages` / root。
+主分支保存源码；发布时运行 `npm run build`，将 `dist` 产物推送到 `gh-pages` 分支，并将 GitHub Pages source 配置为 `gh-pages` / root。部署到 `gh-pages` 时固定使用 `rsync -a --checksum --delete` 同步 `dist`，避免按大小/时间误判导致的漏拷。
+
+## 大文件资产
+
+官方宣传片等大文件不进仓库：托管在 GitHub Release `assets-v1`（`gh release view assets-v1`），页面通过 `communityData.js` 里的外链直接流式播放。更新宣传片时上传新文件到该 Release 并替换 `promoFilm.src`，不要删除此 Release。

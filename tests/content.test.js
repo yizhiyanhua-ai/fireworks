@@ -72,14 +72,17 @@ test('public feeds keep enough content for the scrolling surfaces', () => {
   assert.ok(wechatArchive.articles.every((article) => article.id && article.title && article.url && article.source));
 });
 
-test('promo film assets exist and stay lean for GitHub Pages', () => {
-  const videoPath = new URL(`../public${promoFilm.src.replace('/fireworks', '')}`, import.meta.url);
+test('promo film streams from Releases and keeps a local poster', () => {
+  // 大文件不进仓库：视频必须外链到 GitHub Releases 资产
+  assert.match(
+    promoFilm.src,
+    /^https:\/\/github\.com\/yizhiyanhua-ai\/fireworks\/releases\/download\/[^/]+\/.+\.mp4$/,
+  );
   const posterPath = new URL(`../public${promoFilm.poster.replace('/fireworks', '')}`, import.meta.url);
-  assert.equal(existsSync(videoPath), true);
   assert.equal(existsSync(posterPath), true);
-  const { size } = statSync(videoPath);
-  assert.ok(size > 1024 * 1024, 'video should not be empty');
-  assert.ok(size < 40 * 1024 * 1024, `video too heavy for Pages: ${size} bytes`);
+  const { size } = statSync(posterPath);
+  assert.ok(size > 10 * 1024, 'poster should not be empty');
+  assert.ok(size < 1024 * 1024, `poster too heavy: ${size} bytes`);
   assert.ok(promoFilm.title.length >= 4);
 });
 

@@ -527,7 +527,9 @@ export const communityGroups = [
 ];
 
 export const promoFilm = {
-  src: '/fireworks/assets/promo-official.mp4',
+  // 视频托管在 GitHub Releases（assets-v1），避免 32MB 二进制进入仓库历史；
+  // 更新宣传片时上传同 Release 并替换此 URL，勿删除该 Release。
+  src: 'https://github.com/yizhiyanhua-ai/fireworks/releases/download/assets-v1/promo-official.mp4',
   poster: '/fireworks/assets/promo-official-poster.jpg',
   title: '一支烟花 AI 官方宣传片',
   duration: '01:54',
