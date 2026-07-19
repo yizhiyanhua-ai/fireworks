@@ -526,6 +526,14 @@ export const communityGroups = [
   },
 ];
 
+export const promoFilm = {
+  src: '/fireworks/assets/promo-official.mp4',
+  poster: '/fireworks/assets/promo-official-poster.jpg',
+  title: '一支烟花 AI 官方宣传片',
+  duration: '01:54',
+  note: '从 2023 年第一束火种，到今天的产品、社群与共创网络。两分钟，看完一支烟花。',
+};
+
 export const communityAccess = {
   docUrl: 'https://hqexj12b0g.feishu.cn/docx/TyymdoAdRodWGJxCi6FcJvEUn2b',
   joinNote: '免费群需要自我介绍并通过资质审查，不必也不可以所有群都加；VIP 付费群通过知识星球加入。完整社群名单与加入方式见公开的社群介绍文档。',

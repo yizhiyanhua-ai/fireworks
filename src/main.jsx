@@ -36,6 +36,7 @@ import { SectionIntro } from './components/SectionIntro';
 import { SignalSection } from './components/SignalSection';
 import { FireworksCanvas } from './components/FireworksCanvas';
 import { CommunityGroups } from './components/CommunityGroups';
+import { PromoFilm } from './components/PromoFilm';
 import './styles.css';
 
 const navItems = [
@@ -412,6 +413,7 @@ function App() {
       <main>
         <Hero />
         <LaunchTicker />
+        <PromoFilm />
         <ProductLab />
         <SignalSection />
         <CommunitySection />

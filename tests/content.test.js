@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
-import { communityAccess, communityGroups, featuredProjects } from '../src/communityData.js';
+import { existsSync, readFileSync, statSync } from 'node:fs';
+import { communityAccess, communityGroups, featuredProjects, promoFilm } from '../src/communityData.js';
 import { formatSnapshotDate, isDirectWechatArticle, isDirectXPost } from '../src/utils/content.js';
 
 const xFeed = JSON.parse(readFileSync(new URL('../public/assets/x-feed.json', import.meta.url), 'utf8'));
@@ -70,6 +70,17 @@ test('public feeds keep enough content for the scrolling surfaces', () => {
   assert.ok(wechatArchive.articles.length >= 20);
   assert.ok(xFeed.posts.every((post) => post.id && post.text && post.url));
   assert.ok(wechatArchive.articles.every((article) => article.id && article.title && article.url && article.source));
+});
+
+test('promo film assets exist and stay lean for GitHub Pages', () => {
+  const videoPath = new URL(`../public${promoFilm.src.replace('/fireworks', '')}`, import.meta.url);
+  const posterPath = new URL(`../public${promoFilm.poster.replace('/fireworks', '')}`, import.meta.url);
+  assert.equal(existsSync(videoPath), true);
+  assert.equal(existsSync(posterPath), true);
+  const { size } = statSync(videoPath);
+  assert.ok(size > 1024 * 1024, 'video should not be empty');
+  assert.ok(size < 40 * 1024 * 1024, `video too heavy for Pages: ${size} bytes`);
+  assert.ok(promoFilm.title.length >= 4);
 });
 
 test('community groups expose only public categories with traceable notes', () => {
